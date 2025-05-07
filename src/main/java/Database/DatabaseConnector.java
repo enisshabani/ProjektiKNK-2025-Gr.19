@@ -7,13 +7,13 @@ public class DatabaseConnector {
     public static Connection databaseLink;
 
     public static Connection getDatabaseLink() {
-        String databaseName = "KNK";
+        String databaseName = "JavaFX";
         String databaseUser = "Grupi 22";
         String databasePassword = "mirdita123";
-        String url = "jdbc:mysql://localhost:3306/" + databaseName;
+        String url = "jdbc:postgresql://localhost:5432/" + databaseName;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("org.postgresql.Driver");
             databaseLink = DriverManager.getConnection(url, databaseUser, databasePassword);
         }catch (Exception e){
             e.printStackTrace();
