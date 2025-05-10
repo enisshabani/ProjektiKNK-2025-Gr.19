@@ -2,22 +2,39 @@ package Database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class DatabaseConnector {
-    public static Connection databaseLink;
+    private static final String URL = "jdbc:postgresql://localhost:5432/JavaFX";
+    private static final String USER = "postgres";
+    private static final String databasePassword = "1234";
 
-    public static Connection getDatabaseLink() {
-        String databaseName = "JavaFX";
-        String databaseUser = "Grupi 22";
-        String databasePassword = "mirdita123";
-        String url = "jdbc:postgresql://localhost:5432/" + databaseName;
-
+    public static Connection getConnection() throws SQLException {
         try {
             Class.forName("org.postgresql.Driver");
-            databaseLink = DriverManager.getConnection(url, databaseUser, databasePassword);
-        }catch (Exception e){
-            e.printStackTrace();
+            // Connection with postgres user and no password
+            return DriverManager.getConnection(URL, USER, databasePassword);
+        } catch (ClassNotFoundException e) {
+            throw new SQLException("PostgreSQL JDBC Driver not found", e);
         }
-        return databaseLink;
+    }
+
+    public static boolean insertLoginData(String email, String password) {
+        String query = "INSERT INTO login(email, password) VALUES(?, ?)";
+
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, email);
+            statement.setString(2, password);
+            statement.executeUpdate();
+            return true;
+
+        } catch (SQLException e) {
+            System.err.println("Error inserting login data: " + e.getMessage());
+            System.err.println("SQL State: " + e.getSQLState());
+            return false;
+        }
     }
 }

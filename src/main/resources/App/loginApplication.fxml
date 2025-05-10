@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0"
+            prefWidth="850.0" style="-fx-background-color: #023047;" xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
+   <Pane layoutX="-1.0" prefHeight="90.0" prefWidth="850.0" style="-fx-background-color: white;">
+      <Hyperlink layoutX="572.0" layoutY="34.0" prefHeight="27.0" prefWidth="74.0" text="Sign Up">
+         <font>
+            <Font size="15.0"/>
+         </font>
+      </Hyperlink>
+      <Hyperlink layoutX="652.0" layoutY="34.0" text="Help">
+         <font>
+            <Font size="15.0"/>
+         </font>
+      </Hyperlink>
+      <Hyperlink layoutX="718.0" layoutY="34.0" text="About">
+         <font>
+            <Font size="15.0"/>
+         </font>
+      </Hyperlink>
+      <ImageView fitHeight="74.0" fitWidth="74.0" layoutX="45.0" layoutY="10.0">
+         <Image url="@../img/images.png"/>
+      </ImageView>
+   </Pane>
+   <TextField fx:id="emailField" layoutX="67.0" layoutY="244.0" prefHeight="30.0" prefWidth="228.0">
+      <font>
+         <Font size="15.0"/>
+      </font>
+   </TextField>
+   <PasswordField fx:id="passwordField" layoutX="67.0" layoutY="320.0" prefHeight="30.0" prefWidth="228.0">
+      <font>
+         <Font size="15.0"/>
+      </font>
+   </PasswordField>
+   <Button fx:id="loginButton" layoutX="67.0" layoutY="365.0" mnemonicParsing="false" prefHeight="25.0"
+           prefWidth="228.0" style="-fx-background-color: #219ebc;" text="Log In" textFill="WHITE">
+      <font>
+         <Font size="15.0"/>
+      </font>
+   </Button>
+   <Hyperlink layoutX="67.0" layoutY="403.0" text="Don't have an account?">
+      <font>
+         <Font size="13.0"/>
+      </font>
+   </Hyperlink>
+   <Label layoutX="67.0" layoutY="222.0" prefHeight="18.0" prefWidth="190.0" text="Email:" textFill="WHITE">
+      <font>
+         <Font size="15.0"/>
+      </font>
+   </Label>
+   <Label layoutX="67.0" layoutY="291.0" prefHeight="18.0" prefWidth="190.0" text="Password:" textFill="WHITE">
+      <font>
+         <Font size="15.0"/>
+      </font>
+   </Label>
+   <Hyperlink layoutX="67.0" layoutY="429.0" text="Forgot password?">
+      <font>
+         <Font size="13.0"/>
+      </font>
+   </Hyperlink>
+   <ImageView fitHeight="460.0" fitWidth="472.0" layoutX="378.0" layoutY="90.0">
+      <Image url="@../img/qendra.jpg"/>
+   </ImageView>
+   <Button layoutX="14.0" layoutY="510.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="65.0" text="AL | EN"/>
+</AnchorPane>
