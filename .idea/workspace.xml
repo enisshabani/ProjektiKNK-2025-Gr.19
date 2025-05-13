@@ -5,7 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e19b21e-9a40-4bdc-9aa9-f4b58fec44d1" name="Changes" comment="Updated files">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Database/database.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Database/DatabaseConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/DatabaseConnector.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,12 +35,12 @@
     &quot;assignee&quot;: &quot;enisshabani&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/enisshabani/ProjektiKNK-2025-Gr.19.git",
-    "accountId": "84da57ee-c694-40b6-a917-763277ffa4bb"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/enisshabani/ProjektiKNK-2025-Gr.19.git&quot;,
+    &quot;accountId&quot;: &quot;fc5e9065-bc88-4899-a3e9-33399342ca21&quot;
   }
-}]]></component>
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -57,12 +62,13 @@
     "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "SHELLCHECK.PATH": "C:\\Users\\shaba_wl7bnsv\\AppData\\Roaming\\JetBrains\\IdeaIC2025.1\\plugins\\Shell Script\\shellcheck.exe",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_directory_selection": "C:/Users/shaba_wl7bnsv/IdeaProjects/ProjektiKNK-2025-Gr.19/src/main/java/com/example",
-    "last_opened_file_path": "C:/Users/shaba_wl7bnsv/IdeaProjects/ProjektiKNK-2025-Gr.19",
+    "last_opened_file_path": "C:/Users/Pia/Documents/postgresql-42.7.5.jar",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -71,8 +77,13 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.sourceCode",
+    "settings.editor.selected.configurable": "promo.database",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
   }
 }]]></component>
   <component name="RecentsManager">
@@ -115,8 +126,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.25410.129" />
+        <option value="bundled-js-predefined-d6986cc7102b-6a121458b545-JavaScript-IU-251.25410.129" />
       </set>
     </attachedChunks>
   </component>
@@ -129,6 +140,8 @@
       <option name="presentableId" value="Default" />
       <updated>1746480247423</updated>
       <workItem from="1747074215396" duration="2187000" />
+      <workItem from="1747148614354" duration="2239000" />
+      <workItem from="1747150872859" duration="662000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
