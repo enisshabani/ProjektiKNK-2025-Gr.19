@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:controller="Controller.SidebarController"
+      xmlns:fx="http://javafx.com/fxml"
+      spacing="15" alignment="TOP_CENTER" styleClass="sidebar">
+
+    <HBox alignment="CENTER" spacing="8">
+        <ImageView fitWidth="70" fitHeight="70" preserveRatio="true">
+            <image>
+                <Image url="@../img/images.png" />
+            </image>
+        </ImageView>
+        <Label text="DMS" styleClass="sidebar-logo-text"/>
+    </HBox>
+
+    <Button text="Dashboard" onAction="#goDashboard" styleClass="sidebar-button"/>
+    <Button text="Studentët" onAction="#goStudents" styleClass="sidebar-button"/>
+    <Button text="Dhomat" onAction="#goRooms" styleClass="sidebar-button"/>
+    <Button text="Aplikimet" onAction="#goApplications" styleClass="sidebar-button"/>
+    <Button text="Statistika" onAction="#goStats" styleClass="sidebar-button"/>
+    <Button text="Ndihmë" onAction="#goHelp" styleClass="sidebar-button"/>
+</VBox>
