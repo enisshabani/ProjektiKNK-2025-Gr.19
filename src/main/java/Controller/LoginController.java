@@ -1,12 +1,20 @@
 package Controller;
 
 import Database.DatabaseConnector;
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+
+import java.io.IOException;
 
 public class LoginController {
     @FXML private TextField emailField;
@@ -40,6 +48,12 @@ public class LoginController {
                 showAlert("Success", "Login data saved to database!");
                 clearFields();
                 System.out.println("Data inserted: " + email);
+
+                // Redirect to homeDashboard.fxml
+                Parent root = FXMLLoader.load(getClass().getResource("/App/homeDashboard.fxml"));
+                Stage stage = (Stage) loginButton.getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
             } else {
                 showAlert("Error", "Failed to save login data!");
             }
@@ -62,5 +76,51 @@ public class LoginController {
     private void clearFields() {
         emailField.clear();
         passwordField.clear();
+    }
+
+    private void handleSuccessfulLogin() {
+        // Create a pause transition for 4 seconds
+        PauseTransition delay = new PauseTransition(Duration.seconds(4));
+        delay.setOnFinished(event -> {
+            try {
+                // Load the home dashboard
+                Parent root = FXMLLoader.load(getClass().getResource("/App/homeDashboard.fxml"));
+                Scene scene = loginButton.getScene();
+                scene.setRoot(root);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        delay.play();
+    }
+
+    @FXML
+    private void handleLogin(ActionEvent event) {
+        // 1. Add your login validation logic here
+        boolean loginSuccessful = validateLogin(); // Your validation method
+
+        if (loginSuccessful) {
+            try {
+                // 2. Load the home dashboard
+                Parent root = FXMLLoader.load(getClass().getResource("/path/to/homeDashboard.fxml"));
+
+                // 3. Get the current stage
+                Stage stage = (Stage) loginButton.getScene().getWindow();
+
+                // 4. Set the new scene
+                stage.setScene(new Scene(root));
+                stage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            // Show error message
+            new Alert(Alert.AlertType.ERROR, "Invalid credentials").show();
+        }
+    }
+
+    private boolean validateLogin() {
+        return false;
     }
 }
