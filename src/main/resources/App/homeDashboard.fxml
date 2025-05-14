@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="Controller.HomeDashboardController"
+            stylesheets="@styles.css">
+
+    <!-- Top Bar -->
+    <top>
+        <HBox fx:id="topBar" spacing="20" alignment="CENTER_LEFT" styleClass="top-bar">
+            <Label text="Dormitory Management System" styleClass="top-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="EN | SQ" styleClass="language-switch"/>
+            <Button text="Account" fx:id="accountButton" styleClass="top-button"/>
+            <Button text="Logout" fx:id="logoutButton" styleClass="top-button"/>
+        </HBox>
+    </top>
+
+    <!-- Sidebar -->
+    <left>
+        <fx:include source="sidebar.fxml"/>
+    </left>
+
+    <!-- Main Content Area -->
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background-color:transparent;">
+            <TilePane fx:id="dashboardTile" hgap="20" vgap="20" alignment="CENTER">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+
+                <VBox styleClass="card-box" alignment="TOP_CENTER" spacing="10" onMouseClicked="#handleDashboardClick">
+                    <ImageView fitWidth="250" fitHeight="140">
+                        <image>
+                            <Image url="@../img/dashboard.jpeg" />
+                        </image>
+                    </ImageView>
+                    <Label text="Dashboard" styleClass="card-title"/>
+                    <Label text="Përmbledhje e sistemit." styleClass="card-description"/>
+                </VBox>
+
+                <VBox styleClass="card-box" alignment="TOP_CENTER" spacing="10" onMouseClicked="#handleStudentsClick">
+                    <ImageView fitWidth="250" fitHeight="140">
+                        <image>
+                            <Image url="@../img/student.jpeg" />
+                        </image>
+                    </ImageView>
+                    <Label text="Studentët" styleClass="card-title"/>
+                    <Label text="Shfaq listën e studentëve." styleClass="card-description"/>
+                </VBox>
+
+                <VBox styleClass="card-box" alignment="TOP_CENTER" spacing="10" onMouseClicked="#handleRoomsClick">
+                    <ImageView fitWidth="250" fitHeight="140">
+                        <image>
+                            <Image url="@../img/dhomat.jpeg" />
+                        </image>
+                    </ImageView>
+                    <Label text="Dhomat" styleClass="card-title"/>
+                    <Label text="Menaxho dhomat dhe kapacitetin." styleClass="card-description"/>
+                </VBox>
+
+                <VBox styleClass="card-box" alignment="TOP_CENTER" spacing="10" onMouseClicked="#handleApplicationsClick">
+                    <ImageView fitWidth="250" fitHeight="140">
+                        <image>
+                            <Image url="@../img/aplikimi.jpeg" />
+                        </image>
+                    </ImageView>
+                    <Label text="Aplikimet" styleClass="card-title"/>
+                    <Label text="Verifiko dhe menaxho aplikimet." styleClass="card-description"/>
+                </VBox>
+
+                <VBox styleClass="card-box" alignment="TOP_CENTER" spacing="10" onMouseClicked="#handleStatsClick">
+                    <ImageView fitWidth="250" fitHeight="140">
+                        <image>
+                            <Image url="@../img/statistika.jpeg" />
+                        </image>
+                    </ImageView>
+                    <Label text="Statistika" styleClass="card-title"/>
+                    <Label text="Analiza dhe grafikët e sistemit." styleClass="card-description"/>
+                </VBox>
+
+                <VBox styleClass="card-box" alignment="TOP_CENTER" spacing="10" onMouseClicked="#handleHelpClick">
+                    <ImageView fitWidth="250" fitHeight="140">
+                        <image>
+                            <Image url="@../img/ndihme.jpeg" />
+                        </image>
+                    </ImageView>
+                    <Label text="Ndihmë" styleClass="card-title"/>
+                    <Label text="Manual përdorimi dhe kontakt." styleClass="card-description"/>
+                </VBox>
+
+            </TilePane>
+        </ScrollPane>
+    </center>
+
+
+
+    <!-- Status Bar -->
+    <bottom>
+        <HBox alignment="CENTER_LEFT" spacing="10" styleClass="status-bar">
+            <padding>
+                <Insets top="5" right="10" bottom="5" left="10"/>
+            </padding>
+            <Label fx:id="statusLabel" text="Ready | Admin logged in"/>
+        </HBox>
+    </bottom>
+</BorderPane>
