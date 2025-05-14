@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.web.*?>
-<?import javafx.geometry.Insets?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="Controller.HelpController"
-            stylesheets="@styles.css">
+<BorderPane stylesheets="@styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="Controller.HelpController">
 
     <!-- Top Bar -->
     <top>
-        <HBox fx:id="topBar" spacing="20" alignment="CENTER_LEFT" styleClass="top-bar">
-            <Label text="Dormitory Management System" styleClass="top-title" />
+        <HBox fx:id="topBar" alignment="CENTER_LEFT" spacing="20" styleClass="top-bar">
+            <Label styleClass="top-title" text="Dormitory Management System" />
             <Region HBox.hgrow="ALWAYS" />
-            <Label text="EN | SQ" styleClass="language-switch" />
-            <Button text="Account" fx:id="accountButton" styleClass="top-button" />
-            <Button text="Logout" fx:id="logoutButton" styleClass="top-button" />
+            <Label styleClass="language-switch" text="EN | SQ" />
+            <Button fx:id="accountButton" styleClass="top-button" text="Account" />
+            <Button fx:id="logoutButton" styleClass="top-button" text="Logout" />
         </HBox>
     </top>
 
@@ -28,50 +25,50 @@
     <!-- Main Help Content -->
     <center>
         <ScrollPane fitToWidth="true" styleClass="help-scroll">
-            <VBox spacing="20" alignment="TOP_LEFT" styleClass="help-content">
+            <VBox alignment="TOP_LEFT" spacing="20" styleClass="help-content">
                 <padding>
-                    <Insets top="20" right="20" bottom="20" left="20"/>
+                    <Insets bottom="20" left="20" right="20" top="20" />
                 </padding>
 
                 <!-- FAQs with dropdowns -->
-                <Label text="Pyetje të shpeshta:" styleClass="section-title" />
+                <Label styleClass="section-title" text="Pyetje të shpeshta:" />
 
-                <TitledPane text=" Si të regjistrohem?" expanded="false">
+                <TitledPane expanded="false" text=" Si të regjistrohem?">
                     <VBox>
                         <padding><Insets top="10" /></padding>
                         <Label text="Ju duhet të shkoni te faqja e regjistrimit dhe të plotësoni formularin me të dhënat tuaja personale." wrapText="true" />
                     </VBox>
                 </TitledPane>
 
-                <TitledPane text=" Nuk mund të kyçem në sistem" expanded="false">
+                <TitledPane expanded="false" text=" Nuk mund të kyçem në sistem">
                     <VBox>
                         <padding><Insets top="10" /></padding>
                         <Label text="Sigurohuni që keni futur emailin dhe fjalëkalimin e saktë. Nëse keni harruar fjalëkalimin, përdorni funksionin 'Harruat fjalëkalimin?'" wrapText="true" />
                     </VBox>
                 </TitledPane>
 
-                <TitledPane text=" A mund të ndryshoj dhomën pas aprovimit?" expanded="false">
+                <TitledPane expanded="false" text=" A mund të ndryshoj dhomën pas aprovimit?">
                     <VBox>
                         <padding><Insets top="10" /></padding>
                         <Label text="Po, ju mund të kërkoni ndërrim të dhomës përmes një kërkese të re të brendshme në platformë." wrapText="true" />
                     </VBox>
                 </TitledPane>
 
-                <TitledPane text=" Si të ndryshoj fjalëkalimin?" expanded="false">
+                <TitledPane expanded="false" text=" Si të ndryshoj fjalëkalimin?">
                     <VBox>
                         <padding><Insets top="10" /></padding>
                         <Label text="Shkoni te llogaria juaj dhe klikoni 'Ndrysho fjalëkalimin'. Plotësoni të dhënat dhe ruani ndryshimet." wrapText="true" />
                     </VBox>
                 </TitledPane>
 
-                <TitledPane text=" Si të kontrolloj statusin e aplikimit?" expanded="false">
+                <TitledPane expanded="false" text=" Si të kontrolloj statusin e aplikimit?">
                     <VBox>
                         <padding><Insets top="10" /></padding>
                         <Label text="Pasi të aplikoni, vizitoni seksionin 'Aplikimet' për të parë statusin tuaj në kohë reale." wrapText="true" />
                     </VBox>
                 </TitledPane>
 
-                <TitledPane text=" A ka ndihmë në dy gjuhë?" expanded="false">
+                <TitledPane expanded="false" text=" A ka ndihmë në dy gjuhë?">
                     <VBox>
                         <padding><Insets top="10" /></padding>
                         <Label text="Po, sistemi ofron mbështetje në gjuhën shqipe dhe angleze. Ju mund të ndërroni gjuhën nga menuja në krye." wrapText="true" />
@@ -79,11 +76,11 @@
                 </TitledPane>
 
                 <!-- Contact Info -->
-                <Label text="Kontakt:" styleClass="section-title" />
+                <Label styleClass="section-title" text="Kontakt:" />
                 <VBox spacing="4" style="-fx-background-color: #f9f9f9; -fx-padding: 15; -fx-background-radius: 8; -fx-border-color: #ddd; -fx-border-radius: 8;">
-                    <Label text="📧 Email: fiek@uni-pr.edu" styleClass="contact-info" />
-                    <Label text="📞 Telefoni: +383 49 123 456" styleClass="contact-info" />
-                    <Label text="📍 Adresa: Rr. Bregu i Diellit, Prishtinë" styleClass="contact-info" />
+                    <Label styleClass="contact-info" text="📧 Email: fiek@uni-pr.edu" />
+                    <Label styleClass="contact-info" text="📞 Telefoni: +383 49 123 456" />
+                    <Label styleClass="contact-info" text="📍 Adresa: Rr. Bregu i Diellit, Prishtinë" />
                 </VBox>
 
             </VBox>

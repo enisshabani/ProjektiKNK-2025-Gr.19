@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class DatabaseConnector {
-    private static final String URL = "jdbc:postgresql://localhost:5432/konvikti";
+    private static final String URL = "jdbc:postgresql://localhost:5432/Konvikti";
     private static final String USER = "postgres";
     private static final String databasePassword = "12345678";
 
