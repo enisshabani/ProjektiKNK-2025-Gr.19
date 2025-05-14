@@ -5,6 +5,7 @@ import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -79,7 +80,7 @@ public class LoginController {
     }
 
     private void handleSuccessfulLogin() {
-        // Create a pause transition for 4 seconds
+
         PauseTransition delay = new PauseTransition(Duration.seconds(4));
         delay.setOnFinished(event -> {
             try {
@@ -102,7 +103,7 @@ public class LoginController {
         if (loginSuccessful) {
             try {
                 // 2. Load the home dashboard
-                Parent root = FXMLLoader.load(getClass().getResource("/path/to/homeDashboard.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/App/homeDashboard.fxml"));
 
                 // 3. Get the current stage
                 Stage stage = (Stage) loginButton.getScene().getWindow();
@@ -115,12 +116,26 @@ public class LoginController {
                 e.printStackTrace();
             }
         } else {
-            // Show error message
             new Alert(Alert.AlertType.ERROR, "Invalid credentials").show();
         }
     }
 
     private boolean validateLogin() {
         return false;
+    }
+
+    @FXML
+    private void handleSignUpLink(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/App/signupApplication.fxml"));
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Navigation Error", "Could not load the sign-up page");
+        }
     }
 }

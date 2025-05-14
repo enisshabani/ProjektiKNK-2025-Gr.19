@@ -13,12 +13,12 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="850.0" style="-fx-background-color: #023047;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
    <Pane layoutX="-1.0" prefHeight="90.0" prefWidth="850.0" style="-fx-background-color: white;">
-      <Hyperlink fx:id="homeLink" layoutX="572.0" layoutY="34.0" prefHeight="27.0" prefWidth="74.0" text="Sign Up">
+      <Hyperlink fx:id="signupLink" layoutX="572.0" layoutY="34.0" onAction="#handleSignUpLink" prefHeight="27.0" prefWidth="74.0" text="Sign Up">
          <font>
             <Font size="15.0" />
          </font>
       </Hyperlink>
-      <Hyperlink layoutX="652.0" layoutY="34.0" text="Help">
+      <Hyperlink fx:id="helpLink" layoutX="652.0" layoutY="34.0" text="Help">
       <font>
             <Font size="15.0" />
          </font>
@@ -47,7 +47,7 @@
          <Font size="15.0" />
       </font>
    </Button>
-   <Hyperlink layoutX="67.0" layoutY="403.0" text="Don't have an account?">
+   <Hyperlink fx:id="noAccount" layoutX="67.0" layoutY="403.0" text="Don't have an account?">
       <font>
          <Font size="13.0" />
       </font>
@@ -62,7 +62,7 @@
          <Font size="15.0" />
       </font>
    </Label>
-   <Hyperlink layoutX="67.0" layoutY="429.0" text="Forgot password?">
+   <Hyperlink fx:id="fpApplication" layoutX="67.0" layoutY="429.0" text="Forgot password?">
       <font>
          <Font size="13.0" />
       </font>
