@@ -47,7 +47,7 @@
          <Font size="15.0" />
       </font>
    </Button>
-   <Hyperlink fx:id="noAccount" layoutX="67.0" layoutY="403.0" text="Don't have an account?">
+   <Hyperlink fx:id="signupLink" layoutX="67.0" layoutY="403.0" onAction="#handleSignUpLink" text="Don't have an account?">
       <font>
          <Font size="13.0" />
       </font>
@@ -62,7 +62,7 @@
          <Font size="15.0" />
       </font>
    </Label>
-   <Hyperlink fx:id="fpApplication" layoutX="67.0" layoutY="429.0" text="Forgot password?">
+   <Hyperlink fx:id="fpApplication" layoutX="67.0" layoutY="429.0" onAction="#handleForgotPasswordLink" text="Forgot password?">
       <font>
          <Font size="13.0" />
       </font>

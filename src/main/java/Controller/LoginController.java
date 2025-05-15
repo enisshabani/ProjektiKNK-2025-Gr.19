@@ -138,4 +138,18 @@ public class LoginController {
             showAlert("Navigation Error", "Could not load the sign-up page");
         }
     }
+
+    @FXML
+    private void handleForgotPasswordLink(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/App/forgotPassword.fxml"));
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
