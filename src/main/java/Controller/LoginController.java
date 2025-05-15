@@ -97,7 +97,6 @@ public class LoginController {
 
     @FXML
     private void handleLogin(ActionEvent event) {
-        // 1. Add your login validation logic here
         boolean loginSuccessful = validateLogin(); // Your validation method
 
         if (loginSuccessful) {
