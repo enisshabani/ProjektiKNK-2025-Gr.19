@@ -28,7 +28,7 @@
                   <Font size="15.0" />
                </font>
             </Hyperlink>
-            <Hyperlink layoutX="718.0" layoutY="34.0" text="About">
+            <Hyperlink fx:id="aboutLink" layoutX="718.0" layoutY="34.0" text="About">
                <font>
                   <Font size="15.0" />
                </font>
@@ -60,12 +60,12 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="67.0" layoutY="345.0" prefHeight="18.0" prefWidth="190.0" text="Password:" textFill="WHITE">
+      <Label fx:id="passwordLabel" layoutX="67.0" layoutY="345.0" prefHeight="18.0" prefWidth="190.0" text="Password:" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Button fx:id="languageButton" layoutX="14.0" layoutY="510.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="65.0" text="AL | EN" />
+      <Button fx:id="languageButton" layoutX="14.0" layoutY="510.0" mnemonicParsing="false" onAction="#handleLanguageSwitch" prefHeight="27.0" prefWidth="65.0" text="AL | EN" />
       <TextField fx:id="lastnameField" layoutX="67.0" layoutY="233.0" prefHeight="30.0" prefWidth="228.0">
          <font>
             <Font size="15.0" />
@@ -76,17 +76,17 @@
             <Font size="15.0" />
          </font>
       </TextField>
-      <Label layoutX="67.0" layoutY="137.0" prefHeight="18.0" prefWidth="190.0" text="Name:" textFill="WHITE">
+      <Label fx:id="nameLabel" layoutX="67.0" layoutY="137.0" prefHeight="18.0" prefWidth="190.0" text="Name:" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="67.0" layoutY="204.0" prefHeight="18.0" prefWidth="190.0" text="Lastname:" textFill="WHITE">
+      <Label fx:id="lastnameLabel" layoutX="67.0" layoutY="204.0" prefHeight="18.0" prefWidth="190.0" text="Lastname:" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="445.0" layoutY="137.0" prefHeight="18.0" prefWidth="190.0" text="University:" textFill="WHITE">
+      <Label fx:id="universityLabel" layoutX="445.0" layoutY="137.0" prefHeight="18.0" prefWidth="190.0" text="University:" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -101,37 +101,37 @@
             <Font size="15.0" />
          </font>
       </TextField>
-      <Label layoutX="445.0" layoutY="345.0" prefHeight="18.0" prefWidth="190.0" text="Gender:" textFill="WHITE">
+      <Label fx:id="genderLabel" layoutX="445.0" layoutY="345.0" prefHeight="18.0" prefWidth="190.0" text="Gender:" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="445.0" layoutY="204.0" prefHeight="18.0" prefWidth="190.0" text="University year:" textFill="WHITE">
+      <Label fx:id="universityYearLabel" layoutX="445.0" layoutY="204.0" prefHeight="18.0" prefWidth="190.0" text="University year:" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <MenuButton layoutX="445.0" layoutY="235.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="139.0" style="-fx-background-color: white;" text="Select">
+      <MenuButton fx:id="selectMenuButton" layoutX="445.0" layoutY="235.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="139.0" style="-fx-background-color: white;" text="Select">
         <items>
-          <MenuItem mnemonicParsing="false" text="First Year" />
-          <MenuItem mnemonicParsing="false" text="Second Year" />
-            <MenuItem mnemonicParsing="false" text="Third Year" />
+          <MenuItem fx:id="firstMenuItem" mnemonicParsing="false" text="First Year" />
+          <MenuItem fx:id="secondMenuItem" mnemonicParsing="false" text="Second Year" />
+            <MenuItem fx:id="thirdMenuItem" mnemonicParsing="false" text="Third Year" />
         </items>
          <font>
             <Font size="15.0" />
          </font>
       </MenuButton>
-      <Label layoutX="445.0" layoutY="275.0" prefHeight="18.0" prefWidth="190.0" text="Avarage Grade:" textFill="WHITE">
+      <Label fx:id="gradeLabel" layoutX="445.0" layoutY="275.0" prefHeight="18.0" prefWidth="190.0" text="Avarage Grade:" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <RadioButton layoutX="445.0" layoutY="381.0" mnemonicParsing="false" text="Male" textFill="WHITE">
+      <RadioButton fx:id="maleRadioButton" layoutX="445.0" layoutY="381.0" mnemonicParsing="false" text="Male" textFill="WHITE">
          <font>
             <Font size="13.0" />
          </font>
       </RadioButton>
-      <RadioButton layoutX="540.0" layoutY="381.0" mnemonicParsing="false" text="Female" textFill="WHITE">
+      <RadioButton fx:id="femaleRadioButton" layoutX="540.0" layoutY="381.0" mnemonicParsing="false" text="Female" textFill="WHITE">
          <font>
             <Font size="13.0" />
          </font>
