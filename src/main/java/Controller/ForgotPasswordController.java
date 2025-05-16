@@ -16,8 +16,7 @@ import java.io.IOException;
 
 public class ForgotPasswordController {
 
-    // FXML Components
-    @FXML private AnchorPane fpApplication;
+    @FXML private AnchorPane forgotPasswordLink;
     @FXML private TextField emailField;
     @FXML private TextField kodiKonfirmimit;
     @FXML private Hyperlink helpLink;
