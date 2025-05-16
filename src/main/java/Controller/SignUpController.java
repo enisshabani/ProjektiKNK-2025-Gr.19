@@ -49,20 +49,17 @@ public class SignUpController {
     private ResourceBundle bundle;
     private boolean isAlbanian = false;
 
-    // EXISTING INITIALIZE (ADDED ONE LINE)
     @FXML
     private void initialize() {
-        loadLanguage(false); // ONLY ADDED THIS LINE
+        loadLanguage(false);
     }
 
-    // NEW METHOD (ADDED)
     @FXML
     private void handleLanguageSwitch(ActionEvent event) {
         isAlbanian = !isAlbanian;
         loadLanguage(isAlbanian);
     }
 
-    // NEW METHOD (ADDED)
     private void loadLanguage(boolean isAlbanian) {
         try {
             Locale locale = isAlbanian ? new Locale("al") : Locale.ENGLISH;
@@ -91,7 +88,6 @@ public class SignUpController {
         }
     }
 
-    // EXISTING METHODS BELOW (ALL UNCHANGED)
     @FXML
     private void handleSignUp(ActionEvent event) {
         String name = nameField.getText();
