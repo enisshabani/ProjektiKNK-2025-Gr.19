@@ -12,37 +12,53 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.util.ResourceBundle;
+import java.util.Locale;
+import java.util.MissingResourceException;
 import java.io.IOException;
 
 public class LoginController {
     @FXML private TextField emailField;
     @FXML private PasswordField passwordField;
+    @FXML private Label passwordLabel;
     @FXML private Button loginButton;
+    @FXML private Hyperlink noAccountLink;
+    @FXML private Hyperlink forgotPasswordLink;
+    @FXML private Hyperlink signupLink;
+    @FXML private Hyperlink helpLink;
+    @FXML private Hyperlink aboutLink;
+    @FXML private MenuButton userTypeMenu;
+    @FXML private MenuItem studentMenuItem;
+    @FXML private MenuItem adminMenuItem;
+    @FXML private Button languageButton;
 
-    // Initialize method (optional)
+    private ResourceBundle bundle;
+    private boolean isAlbanian = false;
+
     @FXML
     public void initialize() {
-        // Set button action if not set in Scene Builder
+        loadLanguage(false); // Load default language
         loginButton.setOnAction(this::handleLoginButtonAction);
     }
 
-    // Handle login button click
     @FXML
     private void handleLoginButtonAction(ActionEvent event) {
         String email = emailField.getText().trim();
         String password = passwordField.getText().trim();
 
-        // Input validation
         if (email.isEmpty() || password.isEmpty()) {
             showAlert("Input Error", "Email and password cannot be empty!");
             return;
         }
 
         try {
-            // Insert data into database
             boolean success = DatabaseConnector.insertLoginData(email, password);
 
             if (success) {
@@ -50,7 +66,6 @@ public class LoginController {
                 clearFields();
                 System.out.println("Data inserted: " + email);
 
-                // Redirect to homeDashboard.fxml
                 Parent root = FXMLLoader.load(getClass().getResource("/App/homeDashboard.fxml"));
                 Stage stage = (Stage) loginButton.getScene().getWindow();
                 stage.setScene(new Scene(root));
@@ -64,7 +79,35 @@ public class LoginController {
         }
     }
 
-    // Helper method to show alerts
+    @FXML
+    private void handleLanguageSwitch(ActionEvent event) {
+        isAlbanian = !isAlbanian;
+        loadLanguage(isAlbanian);
+    }
+
+    private void loadLanguage(boolean isAlbanian) {
+        try {
+            Locale locale = isAlbanian ? new Locale("al") : Locale.ENGLISH;
+            bundle = ResourceBundle.getBundle("language/strings", locale);
+
+            loginButton.setText(bundle.getString("loginButton"));
+            passwordLabel.setText(bundle.getString("passwordLabel"));
+            noAccountLink.setText(bundle.getString("noAccountLink"));
+            forgotPasswordLink.setText(bundle.getString("forgotPasswordLink"));
+            signupLink.setText(bundle.getString("signupLink"));
+            helpLink.setText(bundle.getString("helpLink"));
+            aboutLink.setText(bundle.getString("aboutLink"));
+            userTypeMenu.setText(bundle.getString("selectUser"));
+            studentMenuItem.setText(bundle.getString("studentMenuItem"));
+            adminMenuItem.setText(bundle.getString("adminMenuItem"));
+            languageButton.setText(isAlbanian ? "EN | AL" : "AL | EN");
+
+        } catch (MissingResourceException e) {
+            e.printStackTrace();
+            showAlert("Error", "Language files not found in 'lang/' folder!");
+        }
+    }
+
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -73,18 +116,15 @@ public class LoginController {
         alert.showAndWait();
     }
 
-    // Clear input fields
     private void clearFields() {
         emailField.clear();
         passwordField.clear();
     }
 
     private void handleSuccessfulLogin() {
-
         PauseTransition delay = new PauseTransition(Duration.seconds(4));
         delay.setOnFinished(event -> {
             try {
-                // Load the home dashboard
                 Parent root = FXMLLoader.load(getClass().getResource("/App/homeDashboard.fxml"));
                 Scene scene = loginButton.getScene();
                 scene.setRoot(root);
@@ -97,20 +137,14 @@ public class LoginController {
 
     @FXML
     private void handleLogin(ActionEvent event) {
-        boolean loginSuccessful = validateLogin(); // Your validation method
+        boolean loginSuccessful = validateLogin();
 
         if (loginSuccessful) {
             try {
-                // 2. Load the home dashboard
                 Parent root = FXMLLoader.load(getClass().getResource("/App/homeDashboard.fxml"));
-
-                // 3. Get the current stage
                 Stage stage = (Stage) loginButton.getScene().getWindow();
-
-                // 4. Set the new scene
                 stage.setScene(new Scene(root));
                 stage.show();
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -127,9 +161,7 @@ public class LoginController {
     private void handleSignUpLink(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/App/signupApplication.fxml"));
-
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
@@ -142,9 +174,7 @@ public class LoginController {
     private void handleForgotPasswordLink(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/App/forgotPassword.fxml"));
-
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {

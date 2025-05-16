@@ -25,7 +25,7 @@
             <Font size="15.0" />
          </font>
       </Hyperlink>
-      <Hyperlink layoutX="718.0" layoutY="34.0" text="About">
+      <Hyperlink fx:id="aboutLink" layoutX="718.0" layoutY="34.0" text="About">
          <font>
             <Font size="15.0" />
          </font>
@@ -34,7 +34,7 @@
          <Image url="@../img/images.png" />
       </ImageView>
    </Pane>
-   <TextField fx:id="emailField" layoutX="67.0" layoutY="194.0" prefHeight="30.0" prefWidth="228.0">
+   <TextField fx:id="emailField" layoutX="67.0" layoutY="198.0" prefHeight="30.0" prefWidth="228.0">
       <font>
          <Font size="15.0" />
       </font>
@@ -49,22 +49,22 @@
          <Font size="15.0" />
       </font>
    </Button>
-   <Hyperlink fx:id="noAccount" layoutX="67.0" layoutY="403.0" onAction="#handleSignUpLink" text="Don't have an account?">
+   <Hyperlink fx:id="noAccountLink" layoutX="67.0" layoutY="403.0" onAction="#handleSignUpLink" text="Don't have an account?">
       <font>
          <Font size="13.0" />
       </font>
    </Hyperlink>
-   <Label layoutX="67.0" layoutY="166.0" prefHeight="18.0" prefWidth="190.0" text="Email:" textFill="WHITE">
+   <Label fx:id="emailLabel" layoutX="67.0" layoutY="166.0" prefHeight="18.0" prefWidth="190.0" text="Email:" textFill="WHITE">
       <font>
          <Font size="15.0" />
       </font>
    </Label>
-   <Label layoutX="67.0" layoutY="236.0" prefHeight="18.0" prefWidth="190.0" text="Password:" textFill="WHITE">
+   <Label fx:id="passwordLabel" layoutX="67.0" layoutY="238.0" prefHeight="18.0" prefWidth="190.0" text="Password:" textFill="WHITE">
       <font>
          <Font size="15.0" />
       </font>
    </Label>
-   <Hyperlink fx:id="fpApplication" layoutX="67.0" layoutY="429.0" onAction="#handleForgotPasswordLink" text="Forgot password?">
+   <Hyperlink fx:id="forgotPasswordLink" layoutX="67.0" layoutY="429.0" onAction="#handleForgotPasswordLink" text="Forgot password?">
       <font>
          <Font size="13.0" />
       </font>
@@ -72,11 +72,11 @@
    <ImageView fitHeight="460.0" fitWidth="472.0" layoutX="378.0" layoutY="90.0">
       <Image url="@../img/qendra.jpg" />
    </ImageView>
-   <Button layoutX="14.0" layoutY="510.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="65.0" text="AL | EN" />
-   <MenuButton layoutX="67.0" layoutY="314.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="150.0" style="-fx-background-color: white;" text="Select User">
+   <Button fx:id="languageButton" layoutX="14.0" layoutY="510.0" mnemonicParsing="false" onAction="#handleLanguageSwitch" prefHeight="27.0" prefWidth="65.0" text="AL | EN" />
+   <MenuButton fx:id="userTypeMenu" layoutX="67.0" layoutY="314.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="150.0" style="-fx-background-color: white;" text="Select User">
      <items>
-       <MenuItem mnemonicParsing="false" text="Student" />
-       <MenuItem mnemonicParsing="false" text="Administrator" />
+       <MenuItem fx:id="studentMenuItem" mnemonicParsing="false" text="Student" />
+       <MenuItem fx:id="adminMenuItem" mnemonicParsing="false" text="Administrator" />
      </items>
       <font>
          <Font size="15.0" />
