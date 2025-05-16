@@ -49,7 +49,7 @@
          <Font size="15.0" />
       </font>
    </Button>
-   <Hyperlink fx:id="signupLink" layoutX="67.0" layoutY="403.0" onAction="#handleSignUpLink" text="Don't have an account?">
+   <Hyperlink fx:id="noAccount" layoutX="67.0" layoutY="403.0" onAction="#handleSignUpLink" text="Don't have an account?">
       <font>
          <Font size="13.0" />
       </font>

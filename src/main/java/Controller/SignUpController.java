@@ -49,7 +49,6 @@ public class SignUpController {
         String email = emailField.getText();
         String password = passwordField.getText();
 
-        // Validate input fields
         if (name.isEmpty() || lastname.isEmpty() || email.isEmpty() || password.isEmpty()) {
             System.out.println("Please fill in all fields");
             return;
@@ -65,13 +64,10 @@ public class SignUpController {
     @FXML
     private void handleLogin(ActionEvent event) {
         try {
-            // Load the login FXML file
             Parent root = FXMLLoader.load(getClass().getResource("/App/loginApplication.fxml"));
 
-            // Get the current stage
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            // Set the new scene
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
