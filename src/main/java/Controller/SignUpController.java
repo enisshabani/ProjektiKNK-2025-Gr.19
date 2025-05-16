@@ -12,8 +12,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
-
-// NEW IMPORTS (ADDED)
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -26,7 +24,6 @@ import java.io.IOException;
 
 public class SignUpController {
 
-    // EXISTING FIELDS (UNCHANGED)
     @FXML private TextField nameField;
     @FXML private TextField lastnameField;
     @FXML private TextField emailField;
@@ -34,8 +31,6 @@ public class SignUpController {
     @FXML private Button signupButton;
     @FXML private Hyperlink loginLink;
     @FXML private Hyperlink helpLink;
-
-    // NEW FIELDS (ADDED)
     @FXML private Hyperlink aboutLink;
     @FXML private Button languageButton;
     @FXML private Label nameLabel;
