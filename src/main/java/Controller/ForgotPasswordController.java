@@ -5,38 +5,36 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
+import java.util.ResourceBundle;
+import java.util.Locale;
+import java.util.MissingResourceException;
 import java.io.IOException;
+
 public class ForgotPasswordController {
 
-    @FXML
-    private AnchorPane fpApplication;
+    // FXML Components
+    @FXML private AnchorPane fpApplication;
+    @FXML private TextField emailField;
+    @FXML private TextField kodiKonfirmimit;
+    @FXML private Hyperlink helpLink;
+    @FXML private Hyperlink aboutLink;
+    @FXML private Hyperlink signupLink;
+    @FXML private Label newPasswordLabel;
+    @FXML private Button continueButton;
+    @FXML private Label confirmationLabel;
+    @FXML private Hyperlink noAccountLink;
+    @FXML private Button languageButton;
 
-    @FXML
-    private TextField emailField;
-
-    @FXML
-    private TextField kodiKonfirmimit;
-
-    @FXML
-    private Hyperlink helpLink;
-
-    @FXML
-    private Hyperlink signupLink;
-
-    @FXML
-    private Button continueButton;
+    private ResourceBundle bundle;
+    private boolean isAlbanian = false;
 
     @FXML
     private void initialize() {
+        loadLanguage(false); // Load default (English)
     }
 
     @FXML
@@ -46,24 +44,43 @@ public class ForgotPasswordController {
 
         System.out.println("Email: " + email);
         System.out.println("Confirmation Code: " + confirmationCode);
-
     }
 
     @FXML
     private void handleSignUpLink(ActionEvent event) {
         try {
-            // Load the signup FXML file
             Parent root = FXMLLoader.load(getClass().getResource("/App/signupApplication.fxml"));
-
-            // Get the current stage
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            // Set the new scene
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
             showAlert("Navigation Error", "Could not load the signup page");
+        }
+    }
+
+    @FXML
+    private void handleLanguageSwitch() {
+        isAlbanian = !isAlbanian; // Toggle language
+        loadLanguage(isAlbanian);
+    }
+
+    private void loadLanguage(boolean isAlbanian) {
+        try {
+            Locale locale = isAlbanian ? new Locale("al") : Locale.ENGLISH;
+            bundle = ResourceBundle.getBundle("language/strings", locale);
+
+            confirmationLabel.setText(bundle.getString("confirmationLabel"));
+            newPasswordLabel.setText(bundle.getString("newPasswordLabel"));
+            noAccountLink.setText(bundle.getString("noAccountLink"));
+            continueButton.setText(bundle.getString("continueButton"));
+            helpLink.setText(bundle.getString("helpLink"));
+            aboutLink.setText(bundle.getString("aboutLink"));
+            languageButton.setText(isAlbanian ? "EN | AL" : "AL | EN");
+
+        } catch (MissingResourceException e) {
+            e.printStackTrace();
+            showAlert("Error", "Language resource files not found or keys missing!");
         }
     }
 
