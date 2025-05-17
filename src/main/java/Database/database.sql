@@ -15,3 +15,9 @@ CREATE TABLE signup(
     averageGrade decimal(3, 2),
     gender varchar (10)
 );
+
+CREATE TABLE forgotPassword(
+    email varchar(100),
+    confirmationCode int,
+    newPassword varchar(50)
+);

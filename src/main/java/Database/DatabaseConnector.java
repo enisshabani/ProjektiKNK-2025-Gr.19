@@ -65,4 +65,41 @@ public class DatabaseConnector {
             return false;
         }
     }
+
+    public static boolean insertForgotPasswordData(String email, int confirmationCode, String newPassword) {
+        String query = "INSERT INTO forgotPassword(email, confirmationCode, newPassword) VALUES(?, ?, ?)";
+
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, email);
+            statement.setInt(2, confirmationCode);
+            statement.setString(3, newPassword);
+            statement.executeUpdate();
+            return true;
+
+        } catch (SQLException e) {
+            System.err.println("Error inserting forgot password data: " + e.getMessage());
+            System.err.println("SQL State: " + e.getSQLState());
+            return false;
+        }
+    }
+
+    public static boolean updatePassword(String email, String newPassword) {
+        String query = "UPDATE signup SET password = ? WHERE email = ?";
+
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, newPassword);
+            statement.setString(2, email);
+            int rowsAffected = statement.executeUpdate();
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            System.err.println("Error updating password: " + e.getMessage());
+            System.err.println("SQL State: " + e.getSQLState());
+            return false;
+        }
+    }
 }
