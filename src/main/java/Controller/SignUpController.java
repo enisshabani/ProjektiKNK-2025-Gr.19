@@ -1,5 +1,6 @@
 package Controller;
 
+import Database.DatabaseConnector;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -46,6 +47,37 @@ public class SignUpController {
     @FXML private MenuItem thirdMenuItem;
     @FXML private RadioButton maleRadioButton;
     @FXML private RadioButton femaleRadioButton;
+    @FXML private TextField universityField;
+    @FXML private TextField averageField;
+
+    private String selectedMenuItem;
+
+    @FXML
+    private void handleFirstMenuItem(ActionEvent event) {
+        selectedMenuItem = firstMenuItem.getText();
+        selectMenuButton.setText(selectedMenuItem);
+    }
+
+    @FXML
+    private void handleSecondMenuItem(ActionEvent event) {
+        selectedMenuItem = secondMenuItem.getText();
+        selectMenuButton.setText(selectedMenuItem);
+    }
+
+    @FXML
+    private void handleThirdMenuItem(ActionEvent event) {
+        selectedMenuItem = thirdMenuItem.getText();
+        selectMenuButton.setText(selectedMenuItem);
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
     private ResourceBundle bundle;
     private boolean isAlbanian = false;
 
@@ -117,5 +149,64 @@ public class SignUpController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    @FXML
+    private void handleSignUpButton(ActionEvent event) {
+        // Get all field values
+        String name = nameField.getText();
+        String lastname = lastnameField.getText();
+        String email = emailField.getText();
+        String password = passwordField.getText();
+        String university = universityField.getText();
+        String universityYear = selectMenuButton.getText();
+        String gender = maleRadioButton.isSelected() ? "Male" : "Female";
+
+        // Validate average grade input
+        double averageGrade;
+        try {
+            averageGrade = Double.parseDouble(averageField.getText());
+            if (averageGrade < 0 || averageGrade > 10) {
+                showAlert("Error", "Average grade must be between 0 and 10");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            showAlert("Error", "Please enter a valid number for average grade");
+            return;
+        }
+
+        // Validate all required fields
+        if (name.isEmpty() || lastname.isEmpty() || email.isEmpty() ||
+                password.isEmpty() || university.isEmpty() || universityYear.isEmpty()) {
+            showAlert("Error", "Please fill in all required fields");
+            return;
+        }
+
+        // Insert data into database
+        boolean success = DatabaseConnector.insertSignupData(
+                name, lastname, email, password, university,
+                universityYear, averageGrade, gender
+        );
+
+        if (success) {
+            showAlert("Success", "Registration successful!");
+            // Clear fields after successful registration
+            clearFields();
+            // Optionally redirect to login page
+            handleLogin(event);
+        } else {
+            showAlert("Error", "Registration failed. Please try again.");
+        }
+    }
+
+    private void clearFields() {
+        nameField.clear();
+        lastnameField.clear();
+        emailField.clear();
+        passwordField.clear();
+        universityField.clear();
+        averageField.clear();
+        selectMenuButton.setText("Select Year");
+        maleRadioButton.setSelected(false);
+        femaleRadioButton.setSelected(false);
     }
 }

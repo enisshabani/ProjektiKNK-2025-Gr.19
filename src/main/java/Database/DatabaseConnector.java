@@ -37,4 +37,32 @@ public class DatabaseConnector {
             return false;
         }
     }
+    public static boolean insertSignupData(String name, String lastname, String email,
+                                           String password, String university,
+                                           String universityYear, double averageGrade,
+                                           String gender) {
+        String query = "INSERT INTO signup(name, lastname, email, password, university, " +
+                "universityYear, averageGrade, gender) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, name);
+            statement.setString(2, lastname);
+            statement.setString(3, email);
+            statement.setString(4, password);
+            statement.setString(5, university);
+            statement.setString(6, universityYear);
+            statement.setDouble(7, averageGrade);
+            statement.setString(8, gender);
+
+            statement.executeUpdate();
+            return true;
+
+        } catch (SQLException e) {
+            System.err.println("Error inserting signup data: " + e.getMessage());
+            System.err.println("SQL State: " + e.getSQLState());
+            return false;
+        }
+    }
 }

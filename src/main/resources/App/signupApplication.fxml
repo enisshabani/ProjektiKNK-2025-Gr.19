@@ -50,7 +50,7 @@
             <Font size="15.0" />
          </font>
       </PasswordField>
-      <Button fx:id="signupButton" layoutX="67.0" layoutY="424.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="228.0" style="-fx-background-color: #219ebc;" text="Sign Up" textFill="WHITE">
+      <Button fx:id="signupButton" layoutX="67.0" layoutY="424.0" mnemonicParsing="false" onAction="#handleSignUpButton" prefHeight="25.0" prefWidth="228.0" style="-fx-background-color: #219ebc;" text="Sign Up" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -91,12 +91,12 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField layoutX="445.0" layoutY="304.0" prefHeight="30.0" prefWidth="228.0">
+      <TextField fx:id="averageField" layoutX="445.0" layoutY="304.0" prefHeight="30.0" prefWidth="228.0">
          <font>
             <Font size="15.0" />
          </font>
       </TextField>
-      <TextField layoutX="445.0" layoutY="166.0" prefHeight="30.0" prefWidth="228.0">
+      <TextField fx:id="universityField" layoutX="445.0" layoutY="166.0" prefHeight="30.0" prefWidth="228.0">
          <font>
             <Font size="15.0" />
          </font>
@@ -113,9 +113,9 @@
       </Label>
       <MenuButton fx:id="selectMenuButton" layoutX="445.0" layoutY="235.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="139.0" style="-fx-background-color: white;" text="Select">
         <items>
-          <MenuItem fx:id="firstMenuItem" mnemonicParsing="false" text="First Year" />
-          <MenuItem fx:id="secondMenuItem" mnemonicParsing="false" text="Second Year" />
-            <MenuItem fx:id="thirdMenuItem" mnemonicParsing="false" text="Third Year" />
+          <MenuItem fx:id="firstMenuItem" mnemonicParsing="false" onAction="#handleFirstMenuItem" text="First Year" />
+          <MenuItem fx:id="secondMenuItem" mnemonicParsing="false" onAction="#handleSecondMenuItem" text="Second Year" />
+            <MenuItem fx:id="thirdMenuItem" mnemonicParsing="false" onAction="#handleThirdMenuItem" text="Third Year" />
         </items>
          <font>
             <Font size="15.0" />
