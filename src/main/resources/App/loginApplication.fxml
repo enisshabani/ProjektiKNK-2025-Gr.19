@@ -73,10 +73,10 @@
       <Image url="@../img/qendra.jpg" />
    </ImageView>
    <Button fx:id="languageButton" layoutX="14.0" layoutY="510.0" mnemonicParsing="false" onAction="#handleLanguageSwitch" prefHeight="27.0" prefWidth="65.0" text="AL | EN" />
-   <MenuButton fx:id="userTypeMenu" layoutX="67.0" layoutY="314.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="150.0" style="-fx-background-color: white;" text="Select User">
+   <MenuButton fx:id="userTypeMenuButton" layoutX="67.0" layoutY="314.0" mnemonicParsing="false" onAction="#handleUserTypeMenuButton" prefHeight="31.0" prefWidth="150.0" style="-fx-background-color: white;" text="Select User">
      <items>
-       <MenuItem fx:id="studentMenuItem" mnemonicParsing="false" text="Student" />
-       <MenuItem fx:id="adminMenuItem" mnemonicParsing="false" text="Administrator" />
+       <MenuItem fx:id="studentMenuItem" mnemonicParsing="false" onAction="#handleStudentSelection" text="Student" />
+       <MenuItem fx:id="adminMenuItem" mnemonicParsing="false" onAction="#handleAdminSelection" text="Administrator" />
      </items>
       <font>
          <Font size="15.0" />

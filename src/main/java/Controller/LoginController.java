@@ -25,33 +25,52 @@ import java.util.MissingResourceException;
 import java.io.IOException;
 
 public class LoginController {
-    @FXML private TextField emailField;
-    @FXML private PasswordField passwordField;
-    @FXML private Label passwordLabel;
-    @FXML private Button loginButton;
-    @FXML private Hyperlink noAccountLink;
-    @FXML private Hyperlink forgotPasswordLink;
-    @FXML private Hyperlink signupLink;
-    @FXML private Hyperlink helpLink;
-    @FXML private Hyperlink aboutLink;
-    @FXML private MenuButton userTypeMenu;
-    @FXML private MenuItem studentMenuItem;
-    @FXML private MenuItem adminMenuItem;
-    @FXML private Button languageButton;
+    @FXML
+    private TextField emailField;
+    @FXML
+    private PasswordField passwordField;
+    @FXML
+    private Label passwordLabel;
+    @FXML
+    private Button loginButton;
+    @FXML
+    private Hyperlink noAccountLink;
+    @FXML
+    private Hyperlink forgotPasswordLink;
+    @FXML
+    private Hyperlink signupLink;
+    @FXML
+    private Hyperlink helpLink;
+    @FXML
+    private Hyperlink aboutLink;
+    @FXML
+    private MenuButton userTypeMenuButton;
+    @FXML
+    private MenuItem studentMenuItem;
+    @FXML
+    private MenuItem adminMenuItem;
+    @FXML
+    private Button languageButton;
 
     private ResourceBundle bundle;
     private boolean isAlbanian = false;
 
+    private String selectedUserType;
+
     @FXML
     public void initialize() {
-        loadLanguage(false); // Load default language
+        loadLanguage(false);
         loginButton.setOnAction(this::handleLoginButtonAction);
+
+        selectedUserType = "Student";
+        userTypeMenuButton.setText(bundle != null ? bundle.getString("studentMenuItem") : "Student");
     }
 
     @FXML
     private void handleLoginButtonAction(ActionEvent event) {
         String email = emailField.getText().trim();
         String password = passwordField.getText().trim();
+        String user_type = selectedUserType;
 
         if (email.isEmpty() || password.isEmpty()) {
             showAlert("Input Error", "Email and password cannot be empty!");
@@ -59,7 +78,7 @@ public class LoginController {
         }
 
         try {
-            boolean success = DatabaseConnector.insertLoginData(email, password);
+            boolean success = DatabaseConnector.insertLoginData(email, password, user_type);
 
             if (success) {
                 showAlert("Success", "Login data saved to database!");
@@ -97,7 +116,7 @@ public class LoginController {
             signupLink.setText(bundle.getString("signupLink"));
             helpLink.setText(bundle.getString("helpLink"));
             aboutLink.setText(bundle.getString("aboutLink"));
-            userTypeMenu.setText(bundle.getString("selectUser"));
+            userTypeMenuButton.setText(bundle.getString("selectUser"));
             studentMenuItem.setText(bundle.getString("studentMenuItem"));
             adminMenuItem.setText(bundle.getString("adminMenuItem"));
             languageButton.setText(isAlbanian ? "EN | AL" : "AL | EN");
@@ -180,5 +199,22 @@ public class LoginController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void handleUserTypeMenuButton(ActionEvent event) {
+        System.out.println("MenuButton clicked");
+    }
+
+    @FXML
+    private void handleStudentSelection(ActionEvent event) {
+        selectedUserType = "Student";
+        userTypeMenuButton.setText(bundle != null ? bundle.getString("studentMenuItem") : "Student");
+    }
+
+    @FXML
+    private void handleAdminSelection(ActionEvent event) {
+        selectedUserType = "Administrator";
+        userTypeMenuButton.setText(bundle != null ? bundle.getString("adminMenuItem") : "Administrator");
     }
 }

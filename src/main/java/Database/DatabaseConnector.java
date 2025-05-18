@@ -20,14 +20,15 @@ public class DatabaseConnector {
         }
     }
 
-    public static boolean insertLoginData(String email, String password) {
-        String query = "INSERT INTO login(email, password) VALUES(?, ?)";
+    public static boolean insertLoginData(String email, String password, String user_type) {
+        String query = "INSERT INTO login(email, password, user_type) VALUES(?, ?, ?)";
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
 
             statement.setString(1, email);
             statement.setString(2, password);
+            statement.setString(3, user_type);
             statement.executeUpdate();
             return true;
 

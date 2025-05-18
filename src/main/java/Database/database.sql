@@ -2,7 +2,8 @@ CREATE DATABASE KONVIKTI;
 
 CREATE TABLE login(
     email varchar(100),
-    password varchar(50)
+    password varchar(50),
+    user_type varchar(20)
 );
 
 CREATE TABLE signup(
