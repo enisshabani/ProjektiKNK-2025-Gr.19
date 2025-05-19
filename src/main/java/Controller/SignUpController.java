@@ -83,7 +83,22 @@ public class SignUpController {
 
     @FXML
     private void initialize() {
+
         loadLanguage(false);
+        helpLink.setOnAction(this::handleHelpLink);
+    }
+
+    @FXML
+    private void handleHelpLink(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/App/helpView.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Navigation Error", "Could not load the help page");
+        }
     }
 
     @FXML

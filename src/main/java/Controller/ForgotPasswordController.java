@@ -35,7 +35,10 @@ public class ForgotPasswordController {
 
     @FXML
     private void initialize() {
-        loadLanguage(false); // Load default (English)
+
+        loadLanguage(false);
+        helpLink.setOnAction(this::handleHelpLink);
+
     }
 
     @FXML
@@ -45,6 +48,19 @@ public class ForgotPasswordController {
 
         System.out.println("Email: " + email);
         System.out.println("Confirmation Code: " + confirmationCode);
+    }
+
+    @FXML
+    private void handleHelpLink(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/App/helpView.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Navigation Error", "Could not load the help page");
+        }
     }
 
     @FXML

@@ -9,12 +9,11 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // Correct the FXML path (remove "name:" parameter)
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/App/loginApplication.fxml"));
         Parent root = loader.load();
 
         Scene scene = new Scene(root, 850, 550);
-        primaryStage.setTitle("Login Form");
+        primaryStage.setTitle("Qendra Studentore");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

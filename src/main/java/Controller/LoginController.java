@@ -61,6 +61,7 @@ public class LoginController {
     public void initialize() {
         loadLanguage(false);
         loginButton.setOnAction(this::handleLoginButtonAction);
+        helpLink.setOnAction(this::handleHelpLink);
 
         selectedUserType = "Student";
         userTypeMenuButton.setText(bundle != null ? bundle.getString("studentMenuItem") : "Student");
@@ -95,6 +96,19 @@ public class LoginController {
         } catch (Exception e) {
             showAlert("Database Error", "Error: " + e.getMessage());
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleHelpLink(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/App/helpView.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Navigation Error", "Could not load the help page");
         }
     }
 
