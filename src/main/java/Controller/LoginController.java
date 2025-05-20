@@ -1,6 +1,7 @@
 package Controller;
 
 import Database.DatabaseConnector;
+import Service.PasswordHasher;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -79,7 +80,9 @@ public class LoginController {
         }
 
         try {
-            boolean success = DatabaseConnector.insertLoginData(email, password, user_type);
+            // Hash the password before storing it
+            String hashedPassword = PasswordHasher.hashPassword(password);
+            boolean success = DatabaseConnector.insertLoginData(email, hashedPassword, user_type);
 
             if (success) {
                 showAlert("Success", "Login data saved to database!");

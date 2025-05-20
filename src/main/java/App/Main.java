@@ -13,7 +13,7 @@ public class Main extends Application {
         Parent root = loader.load();
 
         Scene scene = new Scene(root, 850, 550);
-        primaryStage.setTitle("Qendra Studentore");
+        primaryStage.setTitle("Login Form");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

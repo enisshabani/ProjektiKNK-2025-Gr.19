@@ -11,4 +11,7 @@ module com.example.demo {
 
     exports Controller;
     opens Controller to javafx.fxml;
+
+    exports Service;
+    opens Service to javafx.fxml;
 }

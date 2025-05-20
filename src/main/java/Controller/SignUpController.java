@@ -1,6 +1,7 @@
 package Controller;
 
 import Database.DatabaseConnector;
+import Service.PasswordHasher;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -196,9 +197,12 @@ public class SignUpController {
             return;
         }
 
-        // Insert data into database
+        // Hash the password before storing
+        String hashedPassword = PasswordHasher.hashPassword(password);
+
+        // Insert data into database with hashed password
         boolean success = DatabaseConnector.insertSignupData(
-                name, lastname, email, password, university,
+                name, lastname, email, hashedPassword, university,  // Changed to hashedPassword
                 universityYear, averageGrade, gender
         );
 

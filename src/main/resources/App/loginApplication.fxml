@@ -20,12 +20,12 @@
             <Font size="15.0" />
          </font>
       </Hyperlink>
-      <Hyperlink fx:id="helpLink" layoutX="652.0" layoutY="34.0" onAction="#handleHelpLink" text="Help">
+      <Hyperlink fx:id="helpLink" layoutX="664.0" layoutY="34.0" onAction="#handleHelpLink" text="Help">
       <font>
             <Font size="15.0" />
          </font>
       </Hyperlink>
-      <Hyperlink fx:id="aboutLink" layoutX="718.0" layoutY="34.0" text="About">
+      <Hyperlink fx:id="aboutLink" layoutX="731.0" layoutY="34.0" text="About">
          <font>
             <Font size="15.0" />
          </font>

@@ -1,6 +1,7 @@
 package Controller;
 
 import Database.DatabaseConnector;
+import Service.PasswordHasher;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -123,10 +124,12 @@ public class ForgotPasswordController {
         try {
             int code = Integer.parseInt(confirmationCode);
 
-            boolean requestSaved = DatabaseConnector.insertForgotPasswordData(email, code, newPassword);
+            String hashedPassword = PasswordHasher.hashPassword(newPassword);
+
+            boolean requestSaved = DatabaseConnector.insertForgotPasswordData(email, code, hashedPassword);
 
             if (requestSaved) {
-                boolean passwordUpdated = DatabaseConnector.updatePassword(email, newPassword);
+                boolean passwordUpdated = DatabaseConnector.updatePassword(email, hashedPassword);
 
                 if (passwordUpdated) {
                     showAlert("Success", "Password updated successfully!");
