@@ -80,7 +80,6 @@ public class LoginController {
         }
 
         try {
-            // Hash the password before storing it
             String hashedPassword = PasswordHasher.hashPassword(password);
             boolean success = DatabaseConnector.insertLoginData(email, hashedPassword, user_type);
 

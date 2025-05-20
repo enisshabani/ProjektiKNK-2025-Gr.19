@@ -177,7 +177,6 @@ public class SignUpController {
         String universityYear = selectMenuButton.getText();
         String gender = maleRadioButton.isSelected() ? "Male" : "Female";
 
-        // Validate average grade input
         double averageGrade;
         try {
             averageGrade = Double.parseDouble(averageField.getText());
@@ -190,27 +189,22 @@ public class SignUpController {
             return;
         }
 
-        // Validate all required fields
         if (name.isEmpty() || lastname.isEmpty() || email.isEmpty() ||
                 password.isEmpty() || university.isEmpty() || universityYear.isEmpty()) {
             showAlert("Error", "Please fill in all required fields");
             return;
         }
 
-        // Hash the password before storing
         String hashedPassword = PasswordHasher.hashPassword(password);
 
-        // Insert data into database with hashed password
         boolean success = DatabaseConnector.insertSignupData(
-                name, lastname, email, hashedPassword, university,  // Changed to hashedPassword
+                name, lastname, email, hashedPassword, university,
                 universityYear, averageGrade, gender
         );
 
         if (success) {
             showAlert("Success", "Registration successful!");
-            // Clear fields after successful registration
             clearFields();
-            // Optionally redirect to login page
             handleLogin(event);
         } else {
             showAlert("Error", "Registration failed. Please try again.");

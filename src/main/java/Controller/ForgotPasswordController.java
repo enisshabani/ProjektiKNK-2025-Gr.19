@@ -122,7 +122,6 @@ public class ForgotPasswordController {
             return;
         }
 
-        // Validate confirmation code: exactly 6 digits
         if (!confirmationCode.matches("\\d{6}")) {
             showAlert("Error", bundle.getString("invalidConfirmationCode"));
             return;
