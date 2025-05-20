@@ -39,7 +39,7 @@ public class ForgotPasswordController {
 
         loadLanguage(false);
         helpLink.setOnAction(this::handleHelpLink);
-
+        confirmationField.setPromptText("6-digit code");
     }
 
     @FXML
@@ -94,6 +94,7 @@ public class ForgotPasswordController {
             continueButton.setText(bundle.getString("continueButton"));
             helpLink.setText(bundle.getString("helpLink"));
             aboutLink.setText(bundle.getString("aboutLink"));
+            confirmationField.setPromptText(bundle.getString("confirmationFieldPrompt"));
             languageButton.setText(isAlbanian ? "EN | AL" : "AL | EN");
 
         } catch (MissingResourceException e) {
@@ -117,7 +118,13 @@ public class ForgotPasswordController {
         String newPassword = newPasswordField.getText();
 
         if (email.isEmpty() || confirmationCode.isEmpty() || newPassword.isEmpty()) {
-            showAlert("Error", "Please fill in all fields");
+            showAlert("Error", bundle.getString("fillAllFields"));
+            return;
+        }
+
+        // Validate confirmation code: exactly 6 digits
+        if (!confirmationCode.matches("\\d{6}")) {
+            showAlert("Error", bundle.getString("invalidConfirmationCode"));
             return;
         }
 
@@ -132,16 +139,16 @@ public class ForgotPasswordController {
                 boolean passwordUpdated = DatabaseConnector.updatePassword(email, hashedPassword);
 
                 if (passwordUpdated) {
-                    showAlert("Success", "Password updated successfully!");
+                    showAlert("Success", bundle.getString("passwordUpdatedSuccess"));
                     redirectToLogin(event);
                 } else {
-                    showAlert("Error", "Failed to update password. Email not found.");
+                    showAlert("Error", bundle.getString("emailNotFound"));
                 }
             } else {
-                showAlert("Error", "Failed to process password reset request");
+                showAlert("Error", bundle.getString("resetRequestFailed"));
             }
         } catch (NumberFormatException e) {
-            showAlert("Error", "Confirmation code must be a number");
+            showAlert("Error", bundle.getString("invalidConfirmationCode"));
         }
     }
 
