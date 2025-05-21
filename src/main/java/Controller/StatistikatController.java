@@ -40,5 +40,5 @@ public class StatistikatController {
         approvedLabel.setText("Të Aprovuar: " + approved);
         pendingLabel.setText("Në Pritje: " + pending);
         rejectedLabel.setText("Të Refuzuar: " + rejected);
-    }
+    }
 }
