@@ -1,10 +1,76 @@
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Controller.StatistikatController">
-    <VBox spacing="10" layoutX="50" layoutY="50">
-        <Label fx:id="totalLabel" text="Gjithsej: 0" />
-        <Label fx:id="approvedLabel" text="Të Aprovuar: 0" />
-        <Label fx:id="pendingLabel" text="Në Pritje: 0" />
-        <Label fx:id="rejectedLabel" text="Të Refuzuar: 0" />
-    </VBox>
-</AnchorPane>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/8"
+            fx:controller="Controller.StatistikatController"
+            prefHeight="700.0" prefWidth="1000.0"
+            stylesheets="@styles.css">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" styleClass="top-bar">
+            <children>
+                <Label styleClass="top-title" text="Dormitory Management System"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label styleClass="language-switch" text="EN | SQ"/>
+                <Button fx:id="accountButton" styleClass="top-button" text="Account"/>
+                <Button fx:id="logoutButton" styleClass="top-button" text="Logout"/>
+            </children>
+        </HBox>
+    </top>
+
+    <left>
+        <fx:include source="sidebar.fxml"/>
+    </left>
+
+    <center>
+        <VBox spacing="20" style="-fx-padding: 20;">
+            <children>
+                <Label styleClass="section-title" text="Statistikat e Aplikimeve"/>
+
+                <!-- Summary Section -->
+                <VBox spacing="10">
+                    <children>
+                        <Label fx:id="totalLabel" text="Gjithsej: 0" style="-fx-font-size: 16px;" />
+                        <Label fx:id="approvedLabel" text="Të Aprovuar: 0" style="-fx-font-size: 16px;" />
+                        <Label fx:id="pendingLabel" text="Në Pritje: 0" style="-fx-font-size: 16px;" />
+                        <Label fx:id="rejectedLabel" text="Të Refuzuar: 0" style="-fx-font-size: 16px;" />
+                    </children>
+                </VBox>
+
+                <!-- Table Section -->
+                <ScrollPane fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS">
+                    <content>
+                        <TableView fx:id="statisticsTable" prefHeight="400.0" prefWidth="800.0">
+                            <columns>
+                                <TableColumn fx:id="statusTypeColumn" prefWidth="300.0" text="Lloji i Statusit"/>
+                                <TableColumn fx:id="countColumn" prefWidth="300.0" text="Numri i Aplikimeve"/>
+                            </columns>
+                        </TableView>
+                    </content>
+                </ScrollPane>
+            </children>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_LEFT" spacing="10" styleClass="status-bar">
+            <padding>
+                <Insets top="5" right="10" bottom="5" left="10"/>
+            </padding>
+            <children>
+                <Label fx:id="statusLabel" text="Ready | Admin logged in"/>
+            </children>
+        </HBox>
+    </bottom>
+</BorderPane>
