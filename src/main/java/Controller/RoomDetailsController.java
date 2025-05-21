@@ -11,22 +11,22 @@ import java.util.ResourceBundle;
 
 public class RoomDetailsController implements Initializable {
 
-    @FXML private TableView<Controller.Room> roomTable;
-    @FXML private TableColumn<Controller.Room, Integer> idColumn;
-    @FXML private TableColumn<Controller.Room, String> firstNameColumn;
-    @FXML private TableColumn<Controller.Room, String> lastNameColumn;
-    @FXML private TableColumn<Controller.Room, String> roomColumn;
-    @FXML private TableColumn<Controller.Room, String> genderColumn;
-    @FXML private TableColumn<Controller.Room, String> roomstatusColumn;
-    @FXML private TableColumn<Controller.Room, Integer> buildingidColumn;
-    @FXML private TableColumn<Controller.Room, Integer> capacityColumn;
+    @FXML private TableView<Model.Room> roomTable;
+    @FXML private TableColumn<Model.Room, Integer> idColumn;
+    @FXML private TableColumn<Model.Room, String> firstNameColumn;
+    @FXML private TableColumn<Model.Room, String> lastNameColumn;
+    @FXML private TableColumn<Model.Room, String> roomColumn;
+    @FXML private TableColumn<Model.Room, String> genderColumn;
+    @FXML private TableColumn<Model.Room, String> roomstatusColumn;
+    @FXML private TableColumn<Model.Room, Integer> buildingidColumn;
+    @FXML private TableColumn<Model.Room, Integer> capacityColumn;
 
     @FXML private TextField searchField;
     @FXML private Label statusLabel;
     @FXML private Button accountButton;
     @FXML private Button logoutButton;
 
-    private ObservableList<Controller.Room> roomData = FXCollections.observableArrayList();
+    private ObservableList<Model.Room> roomData = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -42,8 +42,8 @@ public class RoomDetailsController implements Initializable {
 
         // Dummy data
         roomData.addAll(
-                new Controller.Room(1, "Alice", "Smith", "101", "Female", "Occupied", 1, 2),
-                new Controller.Room(2, "Bob", "Johnson", "102", "Male", "Available", 1, 2)
+                new Model.Room(1, "Alice", "Smith", "101", "Female", "Occupied", 1, 2),
+                new Model.Room(2, "Bob", "Johnson", "102", "Male", "Available", 1, 2)
         );
 
         roomTable.setItems(roomData);
@@ -56,8 +56,8 @@ public class RoomDetailsController implements Initializable {
         if (keyword.isEmpty()) {
             roomTable.setItems(roomData);
         } else {
-            ObservableList<Controller.Room> filtered = FXCollections.observableArrayList();
-            for (Controller.Room room : roomData) {
+            ObservableList<Model.Room> filtered = FXCollections.observableArrayList();
+            for (Model.Room room : roomData) {
                 if (room.getRoomNumber().toLowerCase().contains(keyword)) {
                     filtered.add(room);
                 }
