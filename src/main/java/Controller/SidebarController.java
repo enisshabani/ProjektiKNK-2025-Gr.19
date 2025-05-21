@@ -30,14 +30,15 @@ public class SidebarController {
     }
 
     public void goApplications(ActionEvent event) throws IOException {
-        switchScene(event, "/App/applicationsView.fxml", "Aplikimet");
+        switchScene(event, "/App/aplikimet.fxml", "Aplikimet");
     }
 
     public void goStats(ActionEvent event) throws IOException {
-        switchScene(event, "/App/statisticsView.fxml", "Statistikat");
+        switchScene(event, "/App/statistikat.fxml", "Statistikat");
     }
 
     public void goHelp(ActionEvent event) throws IOException {
         switchScene(event, "/App/helpView.fxml", "Ndihma");
     }
+
 }

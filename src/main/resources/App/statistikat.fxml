@@ -18,15 +18,7 @@
             stylesheets="@styles.css">
 
     <top>
-        <HBox alignment="CENTER_LEFT" spacing="20" styleClass="top-bar">
-            <children>
-                <Label styleClass="top-title" text="Dormitory Management System"/>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Label styleClass="language-switch" text="EN | SQ"/>
-                <Button fx:id="accountButton" styleClass="top-button" text="Account"/>
-                <Button fx:id="logoutButton" styleClass="top-button" text="Logout"/>
-            </children>
-        </HBox>
+        <fx:include source="topbar.fxml"/>
     </top>
 
     <left>

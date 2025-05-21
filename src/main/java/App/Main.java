@@ -9,9 +9,9 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/App/loginApplication.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/App/homeDashboard.fxml"));
         Parent root = loader.load();
-
+        
         Scene scene = new Scene(root, 850, 550);
         primaryStage.setTitle("Login Form");
         primaryStage.setScene(scene);

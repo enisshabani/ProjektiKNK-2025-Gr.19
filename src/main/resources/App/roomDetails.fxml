@@ -15,13 +15,7 @@
 <BorderPane prefHeight="700" prefWidth="1000" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RoomDetailsController">
 
     <top>
-        <HBox alignment="CENTER_LEFT" spacing="20" styleClass="top-bar">
-            <Label styleClass="top-title" text="Dormitory Management System" />
-            <Region HBox.hgrow="ALWAYS" />
-            <Button fx:id="languageButton" mnemonicParsing="false" onAction="#applyFilters" text="AL | EN" />
-            <Button fx:id="accountButton" styleClass="top-button" text="Account" />
-            <Button fx:id="logoutButton" styleClass="top-button" text="Logout" />
-        </HBox>
+        <fx:include source="topbar.fxml"/>
     </top>
 
     <left>

@@ -63,7 +63,7 @@ public class HomeDashboardController {
     @FXML
     private void handleApplyButton() {
         statusLabel.setText("Forma e aplikimit u hap.");
-        switchScene("/App/applicationsView.fxml", "Aplikimet");
+        switchScene("/App/aplikimet.fxml", "Aplikimet");
     }
 
     @FXML
@@ -75,7 +75,7 @@ public class HomeDashboardController {
     @FXML
     private void handleAddRoomButton() {
         statusLabel.setText("Shto një dhomë të re.");
-        switchScene("/App/roomsView.fxml", "Dhomat");
+        switchScene("/App/roomDetails.fxml", "Dhomat");
     }
 
     @FXML
@@ -99,7 +99,7 @@ public class HomeDashboardController {
     @FXML
     private void handleApplicationsClick() {
         statusLabel.setText("Aplikimet u klikuan");
-        switchScene("/App/applicationsView.fxml", "Aplikimet");
+        switchScene("/App/aplikimet.fxml", "Aplikimet");
     }
 
     @FXML
