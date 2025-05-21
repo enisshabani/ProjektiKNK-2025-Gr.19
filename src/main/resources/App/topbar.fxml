@@ -7,6 +7,6 @@
     <Label text="Dormitory Management System" styleClass="top-title"/>
     <Region HBox.hgrow="ALWAYS"/>
     <Label text="EN | SQ" styleClass="language-switch"/>
-    <Button text="Account" fx:id="accountButton" styleClass="top-button"/>
-    <Button text="Logout" fx:id="logoutButton" styleClass="top-button"/>
+    <Button text="Account" fx:id="accountButton" styleClass="top-button" onAction="#handleAccount"/>
+    <Button text="Logout" fx:id="logoutButton" styleClass="top-button" onAction="#handleLogout"/>
 </HBox>

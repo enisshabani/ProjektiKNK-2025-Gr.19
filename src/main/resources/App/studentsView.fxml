@@ -12,13 +12,7 @@
             prefWidth="1000" prefHeight="700">
 
     <top>
-        <HBox spacing="20" alignment="CENTER_LEFT" styleClass="top-bar">
-            <Label text="Dormitory Management System" styleClass="top-title"/>
-            <Region HBox.hgrow="ALWAYS"/>
-            <Label text="EN | SQ" styleClass="language-switch"/>
-            <Button text="Account" fx:id="accountButton" styleClass="top-button"/>
-            <Button text="Logout" fx:id="logoutButton" styleClass="top-button"/>
-        </HBox>
+        <fx:include source="topbar.fxml"/>
     </top>
 
     <left>
