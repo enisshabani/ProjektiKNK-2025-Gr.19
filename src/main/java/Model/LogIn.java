@@ -3,43 +3,48 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class LogIn {
-     private int id;
-     private String user;
-     private LocalDate date;
-     private LocalDateTime time;
-     private int IPAddress;
-     private String isLoginSuccsesful;
+    private int id;
+    private String email;
+    private String password;
+    private String user_type;
 
-    public LogIn(int id, String user, LocalDateTime time, LocalDate date, int IPAddress, String isLoginSuccsesful) {
+
+    public LogIn(int id, String email, String password, String user_type) {
         this.id = id;
-        this.user = user;
-        this.time = time;
-        this.date = date;
-        this.IPAddress = IPAddress;
-        this.isLoginSuccsesful = isLoginSuccsesful;
+        this.email = email;
+        this.password = password;
+        this.user_type = user_type;
     }
 
-    public int getId() { return id; }
+    public int getId() {
+        return id;
+    }
 
-    public void setId(int id) { this.id = id; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public String getUser() { return user; }
+    public String getEmail() {
+        return email;
+    }
 
-    public void setUser(String user) { this.user = user; }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    public LocalDate getDate() { return date; }
+    public String getPassword() {
+        return password;
+    }
 
-    public void setDate(LocalDate date) { this.date = date; }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-    public LocalDateTime getTime() { return time; }
+    public String getUser_type() {
+        return user_type;
+    }
 
-    public void setTime(LocalDateTime time) { this.time = time; }
-
-    public int getIPAddress() { return IPAddress; }
-
-    public void setIPAddress(int IPAddress) { this.IPAddress = IPAddress; }
-
-    public String getIsLoginSuccsesful() { return isLoginSuccsesful; }
-
-    public void setIsLoginSuccsesful(String isLoginSuccsesful) { this.isLoginSuccsesful = isLoginSuccsesful; }
+    public void setUser_type(String user_type) {
+        this.user_type = user_type;
+    }
 }
