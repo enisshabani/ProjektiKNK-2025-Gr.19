@@ -21,12 +21,13 @@
 
     <center>
         <VBox spacing="10" style="-fx-padding: 20;">
-            <Label text="Lista e Studentëve" styleClass="section-title" />
+            <Label fx:id="titleLabel" styleClass="section-title" />
 
             <HBox spacing="10" alignment="CENTER_LEFT">
-                <TextField fx:id="searchField" promptText="Kërko student..." />
-                <ComboBox fx:id="filterStatus" promptText="Filtroni statusin" />
-                <Button text="Kërko" onAction="#applyFilters"/>
+                <TextField fx:id="searchField" />
+                <ComboBox fx:id="filterStatus" />
+                <Button fx:id="searchButton" onAction="#applyFilters"/>
+                <Button fx:id="languageButton" text="EN/AL"/>
             </HBox>
 
             <!-- SCROLLABLE TABLE CONTAINER -->
@@ -35,15 +36,15 @@
                            minWidth="950"
                            VBox.vgrow="ALWAYS">
                     <columns>
-                        <TableColumn fx:id="idColumn" text="ID" prefWidth="40"/>
-                        <TableColumn fx:id="firstNameColumn" text="First Name" prefWidth="100"/>
-                        <TableColumn fx:id="lastNameColumn" text="Last Name" prefWidth="100"/>
-                        <TableColumn fx:id="emailColumn" text="Email" prefWidth="150"/>
-                        <TableColumn fx:id="genderColumn" text="Gender" prefWidth="80"/>
-                        <TableColumn fx:id="schoolColumn" text="School" prefWidth="120"/>
-                        <TableColumn fx:id="yearOfStudyColumn" text="Year" prefWidth="60"/>
-                        <TableColumn fx:id="cityColumn" text="City" prefWidth="100"/>
-                        <TableColumn fx:id="statusColumn" text="Status" prefWidth="80"/>
+                        <TableColumn fx:id="idcolumn" prefWidth="40"/>
+                        <TableColumn fx:id="firstNameColumn" prefWidth="100"/>
+                        <TableColumn fx:id="lastNameColumn" prefWidth="100"/>
+                        <TableColumn fx:id="emailColumn" prefWidth="150"/>
+                        <TableColumn fx:id="genderColumn" prefWidth="80"/>
+                        <TableColumn fx:id="schoolColumn" prefWidth="120"/>
+                        <TableColumn fx:id="yearOfStudyColumn" prefWidth="60"/>
+                        <TableColumn fx:id="cityColumn" prefWidth="100"/>
+                        <TableColumn fx:id="statusColumn" prefWidth="80"/>
                     </columns>
                 </TableView>
             </ScrollPane>
@@ -62,4 +63,3 @@
     </bottom>
 
 </BorderPane>
-

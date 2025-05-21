@@ -70,5 +70,5 @@ public class RoomAssignment {
         return status;
     }
 
-    public void setStatus(AssignmentStatus status) { this.status = status; }
+    public void setStatus(AssignmentStatus status) { this.status = status; }
 }
