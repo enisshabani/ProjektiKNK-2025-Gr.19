@@ -93,7 +93,7 @@ public class HomeDashboardController {
     @FXML
     private void handleRoomsClick() {
         statusLabel.setText("Dhomat u klikuan");
-        switchScene("/App/roomsView.fxml", "Dhomat");
+        switchScene("/App/roomDetails.fxml", "Dhomat");
     }
 
     @FXML
@@ -114,3 +114,5 @@ public class HomeDashboardController {
         switchScene("/App/helpView.fxml", "Ndihmë");
     }
 }
+
+

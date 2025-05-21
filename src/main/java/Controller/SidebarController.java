@@ -26,7 +26,7 @@ public class SidebarController {
     }
 
     public void goRooms(ActionEvent event) throws IOException {
-        switchScene(event, "/App/roomsView.fxml", "Dhomat");
+        switchScene(event, "/App/roomDetails.fxml", "Dhomat");
     }
 
     public void goApplications(ActionEvent event) throws IOException {
