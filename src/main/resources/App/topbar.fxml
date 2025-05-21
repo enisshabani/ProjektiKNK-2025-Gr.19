@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<HBox fx:id="topBar" xmlns:fx="http://javafx.com/fxml" spacing="20" alignment="CENTER_LEFT" styleClass="top-bar" fx:controller="Controller.TopbarController">
+    <Label text="Dormitory Management System" styleClass="top-title"/>
+    <Region HBox.hgrow="ALWAYS"/>
+    <Label text="EN | SQ" styleClass="language-switch"/>
+    <Button text="Account" fx:id="accountButton" styleClass="top-button"/>
+    <Button text="Logout" fx:id="logoutButton" styleClass="top-button"/>
+</HBox>
