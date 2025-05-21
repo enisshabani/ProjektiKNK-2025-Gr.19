@@ -3,6 +3,8 @@ module com.example.demo {
     requires javafx.fxml;
     requires java.sql;
 
+
+
     opens com.example.demo1 to javafx.fxml;
     exports com.example.demo1;
 
@@ -11,7 +13,4 @@ module com.example.demo {
 
     exports Controller;
     opens Controller to javafx.fxml;
-
-    exports Service;
-    opens Service to javafx.fxml;
 }
