@@ -1,0 +1,10 @@
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="Controller.StatistikatController">
+    <VBox spacing="10" layoutX="50" layoutY="50">
+        <Label fx:id="totalLabel" text="Gjithsej: 0" />
+        <Label fx:id="approvedLabel" text="Të Aprovuar: 0" />
+        <Label fx:id="pendingLabel" text="Në Pritje: 0" />
+        <Label fx:id="rejectedLabel" text="Të Refuzuar: 0" />
+    </VBox>
+</AnchorPane>
