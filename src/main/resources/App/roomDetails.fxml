@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Controller.RoomDetailsController"
+            prefHeight="700" prefWidth="1000"
+            stylesheets="@styles.css">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" styleClass="top-bar">
+            <Label styleClass="top-title" text="Dormitory Management System" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Label styleClass="language-switch" text="EN | SQ" />
+            <Button fx:id="accountButton" styleClass="top-button" text="Account" />
+            <Button fx:id="logoutButton" styleClass="top-button" text="Logout" />
+        </HBox>
+    </top>
+
+    <left>
+        <fx:include source="sidebar.fxml" />
+    </left>
+
+    <center>
+        <VBox spacing="10" style="-fx-padding: 20;">
+            <Label styleClass="section-title" text="Lista e dhomave te studentëve" />
+
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <TextField fx:id="searchField" promptText="Kërko dhomen..." />
+                <Button onAction="#applyFilters" text="Kërko" />
+            </HBox>
+
+            <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="AS_NEEDED" vbarPolicy="AS_NEEDED" VBox.vgrow="ALWAYS">
+                <TableView fx:id="roomTable" minWidth="950" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="idColumn" prefWidth="40" text="ID" />
+                        <TableColumn fx:id="firstNameColumn" prefWidth="100" text="First Name" />
+                        <TableColumn fx:id="lastNameColumn" prefWidth="100" text="Last Name" />
+                        <TableColumn fx:id="roomColumn" prefWidth="150" text="RoomNumber" />
+                        <TableColumn fx:id="genderColumn" prefWidth="80" text="Gender" />
+                        <TableColumn fx:id="roomstatusColumn" prefWidth="120" text="Room Status" />
+                        <TableColumn fx:id="buildingidColumn" prefWidth="82.67" text="BuildingID" />
+                        <TableColumn fx:id="capacityColumn" prefWidth="106.0" text="Capacity" />
+                    </columns>
+                </TableView>
+            </ScrollPane>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_LEFT" spacing="10" styleClass="status-bar">
+            <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+            </padding>
+            <Label fx:id="statusLabel" text="Ready | Admin logged in" />
+        </HBox>
+    </bottom>
+
+</BorderPane>

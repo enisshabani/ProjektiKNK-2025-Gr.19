@@ -1,40 +1,36 @@
-package Model;
+package Controller;
+
+import javafx.beans.property.*;
 
 public class Room {
-    private int roomNumber;
-    private int capacity;
-    private String genderAllowed;
-    private String status;
-    private int buildingId;
+    private final IntegerProperty id;
+    private final StringProperty firstName;
+    private final StringProperty lastName;
+    private final StringProperty roomNumber;
+    private final StringProperty gender;
+    private final StringProperty roomStatus;
+    private final IntegerProperty buildingId;
+    private final IntegerProperty capacity;
 
-    public Room(int roomNumber, int capacity, String genderAllowed, String status, int buildingId) {
-        this.roomNumber = roomNumber;
-        this.capacity = capacity;
-        this.genderAllowed = genderAllowed;
-        this.status = status;
-        this.buildingId = buildingId;
+    public Room(int id, String firstName, String lastName, String roomNumber, String gender, String roomStatus, int buildingId, int capacity) {
+        this.id = new SimpleIntegerProperty(id);
+        this.firstName = new SimpleStringProperty(firstName);
+        this.lastName = new SimpleStringProperty(lastName);
+        this.roomNumber = new SimpleStringProperty(roomNumber);
+        this.gender = new SimpleStringProperty(gender);
+        this.roomStatus = new SimpleStringProperty(roomStatus);
+        this.buildingId = new SimpleIntegerProperty(buildingId);
+        this.capacity = new SimpleIntegerProperty(capacity);
     }
 
-    public int getRoomNumber() { return roomNumber; }
+    public IntegerProperty idProperty() { return id; }
+    public StringProperty firstNameProperty() { return firstName; }
+    public StringProperty lastNameProperty() { return lastName; }
+    public StringProperty roomNumberProperty() { return roomNumber; }
+    public StringProperty genderProperty() { return gender; }
+    public StringProperty roomStatusProperty() { return roomStatus; }
+    public IntegerProperty buildingIdProperty() { return buildingId; }
+    public IntegerProperty capacityProperty() { return capacity; }
 
-    public void setRoomNumber(int roomNumber) { this.roomNumber = roomNumber; }
-
-    public int getCapacity() { return capacity; }
-
-    public void setCapacity(int capacity) { this.capacity = capacity; }
-
-    public String getGenderAllowed() { return genderAllowed; }
-
-    public void setGenderAllowed(String genderAllowed) { this.genderAllowed = genderAllowed; }
-
-    public String getStatus() { return status; }
-
-    public void setStatus(String status) { this.status = status; }
-
-    public int getBuildingId() { return buildingId; }
-
-    public void setBuildingId(int buildingId) { this.buildingId = buildingId; }
+    public String getRoomNumber() { return roomNumber.get(); }
 }
-
-
-
