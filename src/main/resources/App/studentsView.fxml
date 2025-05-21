@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="Controller.StudentsController"
+            stylesheets="@styles.css"
+            prefWidth="1000" prefHeight="700">
+
+    <top>
+        <HBox spacing="20" alignment="CENTER_LEFT" styleClass="top-bar">
+            <Label text="Dormitory Management System" styleClass="top-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="EN | SQ" styleClass="language-switch"/>
+            <Button text="Account" fx:id="accountButton" styleClass="top-button"/>
+            <Button text="Logout" fx:id="logoutButton" styleClass="top-button"/>
+        </HBox>
+    </top>
+
+    <left>
+        <fx:include source="sidebar.fxml"/>
+    </left>
+
+    <center>
+        <VBox spacing="10" style="-fx-padding: 20;">
+            <Label text="Lista e Studentëve" styleClass="section-title" />
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <TextField fx:id="searchField" promptText="Kërko student..." />
+                <ComboBox fx:id="filterStatus" promptText="Filtroni statusin" />
+                <Button text="Kërko" onAction="#applyFilters"/>
+            </HBox>
+
+            <!-- SCROLLABLE TABLE CONTAINER -->
+            <ScrollPane fitToWidth="true" fitToHeight="true" hbarPolicy="AS_NEEDED" vbarPolicy="AS_NEEDED" VBox.vgrow="ALWAYS">
+                <TableView fx:id="studentsTable"
+                           minWidth="950"
+                           VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="idColumn" text="ID" prefWidth="40"/>
+                        <TableColumn fx:id="firstNameColumn" text="First Name" prefWidth="100"/>
+                        <TableColumn fx:id="lastNameColumn" text="Last Name" prefWidth="100"/>
+                        <TableColumn fx:id="emailColumn" text="Email" prefWidth="150"/>
+                        <TableColumn fx:id="genderColumn" text="Gender" prefWidth="80"/>
+                        <TableColumn fx:id="schoolColumn" text="School" prefWidth="120"/>
+                        <TableColumn fx:id="yearOfStudyColumn" text="Year" prefWidth="60"/>
+                        <TableColumn fx:id="cityColumn" text="City" prefWidth="100"/>
+                        <TableColumn fx:id="statusColumn" text="Status" prefWidth="80"/>
+                    </columns>
+                </TableView>
+            </ScrollPane>
+        </VBox>
+    </center>
+
+
+
+    <bottom>
+        <HBox alignment="CENTER_LEFT" spacing="10" styleClass="status-bar">
+            <padding>
+                <Insets top="5" right="10" bottom="5" left="10"/>
+            </padding>
+            <Label fx:id="statusLabel" text="Ready | Admin logged in"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>
+
