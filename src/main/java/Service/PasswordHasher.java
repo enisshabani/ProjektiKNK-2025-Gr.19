@@ -47,4 +47,9 @@ public class PasswordHasher {
             throw new RuntimeException("Failed to verify password", e);
         }
     }
+
+    // Add this method to PasswordHasher class
+    public static boolean checkPassword(String inputPassword, String storedHash) {
+        return verifyPassword(inputPassword, storedHash);
+    }
 }

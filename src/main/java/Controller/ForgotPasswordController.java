@@ -1,6 +1,6 @@
 package Controller;
 
-import Database.DatabaseConnector;
+import Service.DatabaseConnector;
 import Service.PasswordHasher;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

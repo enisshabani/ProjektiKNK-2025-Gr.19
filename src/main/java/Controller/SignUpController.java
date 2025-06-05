@@ -1,7 +1,8 @@
 package Controller;
 
-import Database.DatabaseConnector;
+import Service.DatabaseConnector;
 import Service.PasswordHasher;
+import Service.SignUpService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -166,6 +167,8 @@ public class SignUpController {
             e.printStackTrace();
         }
     }
+    private final SignUpService signUpService = new SignUpService();
+
     @FXML
     private void handleSignUpButton(ActionEvent event) {
         // Get all field values
@@ -180,34 +183,22 @@ public class SignUpController {
         double averageGrade;
         try {
             averageGrade = Double.parseDouble(averageField.getText());
-            if (averageGrade < 0 || averageGrade > 10) {
-                showAlert("Error", "Average grade must be between 0 and 10");
-                return;
-            }
         } catch (NumberFormatException e) {
             showAlert("Error", "Please enter a valid number for average grade");
             return;
         }
 
-        if (name.isEmpty() || lastname.isEmpty() || email.isEmpty() ||
-                password.isEmpty() || university.isEmpty() || universityYear.isEmpty()) {
-            showAlert("Error", "Please fill in all required fields");
-            return;
-        }
-
-        String hashedPassword = PasswordHasher.hashPassword(password);
-
-        boolean success = DatabaseConnector.insertSignupData(
-                name, lastname, email, hashedPassword, university,
-                universityYear, averageGrade, gender
+        DTO.SignUpDTO signUpDTO = new DTO.SignUpDTO(
+                name, lastname, email, password,
+                university, universityYear, averageGrade, gender
         );
 
-        if (success) {
+        if (signUpService.registerUser(signUpDTO)) {
             showAlert("Success", "Registration successful!");
             clearFields();
             handleLogin(event);
         } else {
-            showAlert("Error", "Registration failed. Please try again.");
+            showAlert("Error", "Registration failed. This email already exist");
         }
     }
 

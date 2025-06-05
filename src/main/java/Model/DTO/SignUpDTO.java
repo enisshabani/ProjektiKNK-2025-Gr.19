@@ -1,19 +1,17 @@
-package Model;
+package DTO;
 
-public class SignUp {
-
-    private int id;
+public class SignUpDTO {
     private String name;
     private String lastName;
     private String email;
     private String password;
     private String university;
     private String universityYear;
-    private float averageGrade;
+    private double averageGrade;
     private String gender;
 
-    public SignUp(int id, String name, String lastName, String email, String password, String university, String universityYear, float averageGrade, String gender) {
-        this.id = id;
+    public SignUpDTO(String name, String lastName, String email, String password,
+                     String university, String universityYear, double averageGrade, String gender) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
@@ -24,14 +22,7 @@ public class SignUp {
         this.gender = gender;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    // Getters and Setters
     public String getName() {
         return name;
     }
@@ -80,11 +71,11 @@ public class SignUp {
         this.universityYear = universityYear;
     }
 
-    public float getAverageGrade() {
+    public double getAverageGrade() {
         return averageGrade;
     }
 
-    public void setAverageGrade(float averageGrade) {
+    public void setAverageGrade(double averageGrade) {
         this.averageGrade = averageGrade;
     }
 

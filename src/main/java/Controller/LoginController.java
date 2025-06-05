@@ -1,6 +1,8 @@
 package Controller;
 
-import Database.DatabaseConnector;
+import Model.DTO.LoginDTO;
+import Service.DatabaseConnector;
+import Service.LoginService;
 import Service.PasswordHasher;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -58,6 +60,8 @@ public class LoginController {
 
     private String selectedUserType;
 
+    private final LoginService loginService = new LoginService();
+
     @FXML
     public void initialize() {
         loadLanguage(false);
@@ -70,34 +74,32 @@ public class LoginController {
 
     @FXML
     private void handleLoginButtonAction(ActionEvent event) {
-        String email = emailField.getText().trim();
-        String password = passwordField.getText().trim();
-        String user_type = selectedUserType;
+        LoginDTO loginDTO = new LoginDTO(
+                emailField.getText().trim(),
+                passwordField.getText().trim(),
+                selectedUserType
+        );
 
-        if (email.isEmpty() || password.isEmpty()) {
+        if (loginDTO.getEmail().isEmpty() || loginDTO.getPassword().isEmpty()) {
             showAlert("Input Error", "Email and password cannot be empty!");
             return;
         }
 
-        try {
-            String hashedPassword = PasswordHasher.hashPassword(password);
-            boolean success = DatabaseConnector.insertLoginData(email, hashedPassword, user_type);
+        if (loginService.authenticateUser(loginDTO)) {
+            showAlert("Success", "Login successful!");
+            clearFields();
 
-            if (success) {
-                showAlert("Success", "Login data saved to database!");
-                clearFields();
-                System.out.println("Data inserted: " + email);
-
+            try {
                 Parent root = FXMLLoader.load(getClass().getResource("/App/homeDashboard.fxml"));
                 Stage stage = (Stage) loginButton.getScene().getWindow();
                 stage.setScene(new Scene(root));
                 stage.show();
-            } else {
-                showAlert("Error", "Failed to save login data!");
+            } catch (IOException e) {
+                e.printStackTrace();
+                showAlert("Navigation Error", "Could not load the dashboard");
             }
-        } catch (Exception e) {
-            showAlert("Database Error", "Error: " + e.getMessage());
-            e.printStackTrace();
+        } else {
+            showAlert("Error", "Invalid credentials!");
         }
     }
 
