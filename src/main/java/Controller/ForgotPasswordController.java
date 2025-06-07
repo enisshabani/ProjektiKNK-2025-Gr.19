@@ -1,7 +1,7 @@
 package Controller;
 
-import Service.DatabaseConnector;
-import Service.PasswordHasher;
+import Model.DTO.ForgotPasswordDTO;
+import Service.ForgotPasswordService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -33,54 +33,32 @@ public class ForgotPasswordController {
 
     private ResourceBundle bundle;
     private boolean isAlbanian = false;
+    private ForgotPasswordService forgotPasswordService;
 
     @FXML
     private void initialize() {
-
         loadLanguage(false);
         helpLink.setOnAction(this::handleHelpLink);
         confirmationField.setPromptText("6-digit code");
-    }
-
-    @FXML
-    private void handleContinueButtonAction() {
-        String email = emailField.getText();
-        String confirmationCode = confirmationField.getText();
-
-        System.out.println("Email: " + email);
-        System.out.println("Confirmation Code: " + confirmationCode);
+        this.forgotPasswordService = new ForgotPasswordService(bundle);
     }
 
     @FXML
     private void handleHelpLink(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/App/helpView.fxml"));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            showAlert("Navigation Error", "Could not load the help page");
-        }
+        navigateToPage(event, "/App/helpView.fxml", "help page");
     }
 
     @FXML
     private void handleSignUpLink(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/App/signupApplication.fxml"));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            showAlert("Navigation Error", "Could not load the signup page");
-        }
+        navigateToPage(event, "/App/signupApplication.fxml", "signup page");
     }
 
     @FXML
     private void handleLanguageSwitch() {
-        isAlbanian = !isAlbanian; // Toggle language
+        isAlbanian = !isAlbanian;
         loadLanguage(isAlbanian);
+        // Reinitialize service with updated bundle
+        this.forgotPasswordService = new ForgotPasswordService(bundle);
     }
 
     private void loadLanguage(boolean isAlbanian) {
@@ -88,6 +66,7 @@ public class ForgotPasswordController {
             Locale locale = isAlbanian ? new Locale("al") : Locale.ENGLISH;
             bundle = ResourceBundle.getBundle("language/strings", locale);
 
+            // Update UI elements with translated text
             confirmationLabel.setText(bundle.getString("confirmationLabel"));
             newPasswordLabel.setText(bundle.getString("newPasswordLabel"));
             noAccountLink.setText(bundle.getString("noAccountLink"));
@@ -96,11 +75,62 @@ public class ForgotPasswordController {
             aboutLink.setText(bundle.getString("aboutLink"));
             confirmationField.setPromptText(bundle.getString("confirmationFieldPrompt"));
             languageButton.setText(isAlbanian ? "EN | AL" : "AL | EN");
+            emailField.setPromptText(bundle.getString("emailPrompt"));
 
         } catch (MissingResourceException e) {
             e.printStackTrace();
-            showAlert("Error", "Language resource files not found or keys missing!");
         }
+    }
+
+    @FXML
+    private void handleContinueButton(ActionEvent event) {
+        String email = emailField.getText().trim();
+        String confirmationCode = confirmationField.getText().trim();
+        String newPassword = newPasswordField.getText().trim();
+
+        // Validate input fields
+        if (email.isEmpty() || confirmationCode.isEmpty() || newPassword.isEmpty()) {
+            showAlert("Error", bundle.getString("fillAllFields"));
+            return;
+        }
+
+        // Validate confirmation code format
+        if (!confirmationCode.matches("\\d{6}")) {
+            showAlert("Error", bundle.getString("invalidConfirmationCode"));
+            return;
+        }
+
+        try {
+            int code = Integer.parseInt(confirmationCode);
+            ForgotPasswordDTO dto = new ForgotPasswordDTO(email, code, newPassword);
+
+            String result = forgotPasswordService.processPasswordReset(dto);
+
+            if ("success".equals(result)) {
+                showAlert("Success", bundle.getString("passwordUpdatedSuccess"));
+                redirectToLogin(event);
+            } else {
+                showAlert("Error", result);
+            }
+        } catch (NumberFormatException e) {
+            showAlert("Error", bundle.getString("invalidConfirmationCode"));
+        }
+    }
+
+    private void navigateToPage(ActionEvent event, String fxmlPath, String pageName) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Navigation Error", "Could not load the " + pageName);
+        }
+    }
+
+    private void redirectToLogin(ActionEvent event) {
+        navigateToPage(event, "/App/loginApplication.fxml", "login page");
     }
 
     private void showAlert(String title, String message) {
@@ -109,57 +139,5 @@ public class ForgotPasswordController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
-    }
-
-    @FXML
-    private void handleContinueButton(ActionEvent event) {
-        String email = emailField.getText();
-        String confirmationCode = confirmationField.getText();
-        String newPassword = newPasswordField.getText();
-
-        if (email.isEmpty() || confirmationCode.isEmpty() || newPassword.isEmpty()) {
-            showAlert("Error", bundle.getString("fillAllFields"));
-            return;
-        }
-
-        if (!confirmationCode.matches("\\d{6}")) {
-            showAlert("Error", bundle.getString("invalidConfirmationCode"));
-            return;
-        }
-
-        try {
-            int code = Integer.parseInt(confirmationCode);
-
-            String hashedPassword = PasswordHasher.hashPassword(newPassword);
-
-            boolean requestSaved = DatabaseConnector.insertForgotPasswordData(email, code, hashedPassword);
-
-            if (requestSaved) {
-                boolean passwordUpdated = DatabaseConnector.updatePassword(email, hashedPassword);
-
-                if (passwordUpdated) {
-                    showAlert("Success", bundle.getString("passwordUpdatedSuccess"));
-                    redirectToLogin(event);
-                } else {
-                    showAlert("Error", bundle.getString("emailNotFound"));
-                }
-            } else {
-                showAlert("Error", bundle.getString("resetRequestFailed"));
-            }
-        } catch (NumberFormatException e) {
-            showAlert("Error", bundle.getString("invalidConfirmationCode"));
-        }
-    }
-
-    private void redirectToLogin(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/App/loginApplication.fxml"));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            showAlert("Navigation Error", "Could not load the login page");
-        }
     }
 }

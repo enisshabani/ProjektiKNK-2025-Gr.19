@@ -134,4 +134,8 @@ public class DatabaseConnector {
             return false;
         }
     }
+
+    public static DatabaseConnector getInstance() {
+        return null;
+    }
 }
