@@ -2,123 +2,161 @@ package Controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import Model.Room;
 
-import java.net.URL;
-import java.util.Locale;
-import java.util.ResourceBundle;
+public class RoomDetailsController {
 
-public class RoomDetailsController implements Initializable {
+    @FXML
+    private TableView<Room> roomTable;
 
-    @FXML private TableView<Model.Room> roomTable;
-    @FXML private TableColumn<Model.Room, Integer> idColumn;
-    @FXML private TableColumn<Model.Room, String> firstNameColumn;
-    @FXML private TableColumn<Model.Room, String> lastNameColumn;
-    @FXML private TableColumn<Model.Room, String> roomColumn;
-    @FXML private TableColumn<Model.Room, String> genderColumn;
-    @FXML private TableColumn<Model.Room, String> roomstatusColumn;
-    @FXML private TableColumn<Model.Room, Integer> buildingidColumn;
-    @FXML private TableColumn<Model.Room, Integer> capacityColumn;
+    @FXML
+    private TableColumn<Room, Integer> idColumn;
 
-    @FXML private TextField searchField;
-    @FXML private Label statusLabel;
-    @FXML private Button accountButton;
-    @FXML private Button logoutButton;
+    @FXML
+    private TableColumn<Room, String> firstNameColumn;
 
-    @FXML private Button languageButton;
-    @FXML private Button searchButton;
+    @FXML
+    private TableColumn<Room, String> lastNameColumn;
 
-    private ResourceBundle bundle;
-    private boolean isAlbanian = true;
+    @FXML
+    private TableColumn<Room, String> roomColumn;
 
-    private ObservableList<Model.Room> roomData = FXCollections.observableArrayList();
+    @FXML
+    private TableColumn<Room, String> genderColumn;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    @FXML
+    private TableColumn<Room, String> roomstatusColumn;
 
-        idColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
-        firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
-        lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
-        roomColumn.setCellValueFactory(cellData -> cellData.getValue().roomNumberProperty());
-        genderColumn.setCellValueFactory(cellData -> cellData.getValue().genderProperty());
-        roomstatusColumn.setCellValueFactory(cellData -> cellData.getValue().roomStatusProperty());
-        buildingidColumn.setCellValueFactory(cellData -> cellData.getValue().buildingIdProperty().asObject());
-        capacityColumn.setCellValueFactory(cellData -> cellData.getValue().capacityProperty().asObject());
+    @FXML
+    private TableColumn<Room, String> buildingidColumn;
 
+    @FXML
+    private TableColumn<Room, Integer> capacityColumn;
 
-        roomData.addAll(
-                new Model.Room(1, "Ermal", "Hoxha", "101", "M", "X", 1, 2),
-                new Model.Room(2, "Anisa", "Bardhi", "102", "F", "✓", 1, 2),
-                new Model.Room(3, "Besnik", "Dervishi", "103", "M", "X", 2, 3),
-                new Model.Room(4, "Drita", "Kastrati", "104", "F", "✓", 1, 1),
-                new Model.Room(5, "Fisnik", "Berisha", "105", "M", "X", 3, 4),
-                new Model.Room(6, "Gentiana", "Gjoka", "106", "F", "✓", 2, 2),
-                new Model.Room(7, "Hektor", "Kulla", "107", "M", "X", 1, 3),
-                new Model.Room(8, "Ilirjana", "Mema", "108", "F", "✓", 2, 1),
-                new Model.Room(9, "Jeton", "Prifti", "109", "M", "X", 4, 4),
-                new Model.Room(10, "Klea", "Shkreli", "110", "F", "✓", 1, 2),
-                new Model.Room(11, "Liridon", "Toska", "111", "M", "X", 2, 3),
-                new Model.Room(12, "Majlinda", "Vogli", "112", "F", "✓", 3, 2),
-                new Model.Room(13, "Nderim", "Zeka", "113", "M", "X", 1, 1),
-                new Model.Room(14, "Ornela", "Xhafa", "114", "F", "✓", 2, 4),
-                new Model.Room(15, "Pellumb", "Basha", "115", "M", "X", 3, 3),
-                new Model.Room(16, "Rozafa", "Cani", "116", "F", "✓", 1, 2),
-                new Model.Room(17, "Shpend", "Deda", "117", "M", "X", 4, 1),
-                new Model.Room(18, "Teuta", "Elbasani", "118", "F", "✓", 2, 2),
-                new Model.Room(19, "Valon", "Fazliu", "119", "M", "X", 3, 4),
-                new Model.Room(20, "Zana", "Gjinali", "120", "F", "✓", 1, 3)
-        );
+    @FXML
+    private TextField searchField;
 
-        roomTable.setItems(roomData);
-        statusLabel.setText("Loaded " + roomData.size() + " rooms.");
+    @FXML
+    private Button searchButton;
 
-        bundle = ResourceBundle.getBundle("language/strings", new Locale("al"));
-        languageButton.setOnAction(e -> toggleLanguage());
-        updateUI();
+    @FXML
+    private Button languageButton;
+
+    @FXML
+    private Label statusLabel;
+
+    private ObservableList<Room> roomData = FXCollections.observableArrayList();
+    private FilteredList<Room> filteredData = new FilteredList<>(roomData, p -> true);
+
+    @FXML
+    public void initialize() {
+
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        roomColumn.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
+        genderColumn.setCellValueFactory(new PropertyValueFactory<>("gender"));
+        roomstatusColumn.setCellValueFactory(new PropertyValueFactory<>("roomStatus"));
+        buildingidColumn.setCellValueFactory(new PropertyValueFactory<>("building"));
+        capacityColumn.setCellValueFactory(new PropertyValueFactory<>("capacity"));
+
+        loadSampleData();
+
+        setupSearchFilter();
+
+        statusLabel.setText("Ready | Admin logged in");
+
+        languageButton.setOnAction(event -> toggleLanguage());
+    }
+
+    private void loadSampleData() {
+        // This is sample data - replace with your actual data loading logic
+        roomData.add(new Room(1, "John", "Doe", "101", "Male", "Occupied", "Building A", 2));
+        roomData.add(new Room(2, "Jane", "Smith", "102", "Female", "Occupied", "Building A", 2));
+        roomData.add(new Room(3, "Alice", "Johnson", "201", "Female", "Available", "Building B", 3));
+        roomData.add(new Room(4, "Bob", "Williams", "202", "Male", "Maintenance", "Building B", 3));
+
+        SortedList<Room> sortedData = new SortedList<>(filteredData);
+
+        sortedData.comparatorProperty().bind(roomTable.comparatorProperty());
+
+        roomTable.setItems(sortedData);
+    }
+
+    private void setupSearchFilter() {
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(room -> {
+                // If filter text is empty, display all rooms
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (room.getFirstName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (room.getLastName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (room.getRoomNumber().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (room.getGender().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (room.getRoomStatus().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (room.getBuilding().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (String.valueOf(room.getCapacity()).contains(lowerCaseFilter)) {
+                    return true;
+                }
+                return false;
+            });
+        });
     }
 
     @FXML
     private void applyFilters() {
-        String keyword = searchField.getText().trim().toLowerCase();
-        if (keyword.isEmpty()) {
-            roomTable.setItems(roomData);
-        } else {
-            ObservableList<Model.Room> filtered = FXCollections.observableArrayList();
-            for (Model.Room room : roomData) {
-                if (room.getRoomNumber().toLowerCase().contains(keyword)) {
-                    filtered.add(room);
-                }
-            }
-            roomTable.setItems(filtered);
-        }
     }
 
     private void toggleLanguage() {
-        isAlbanian = !isAlbanian;
-        if (isAlbanian) {
-            bundle = ResourceBundle.getBundle("language/strings", new Locale("al"));
-            languageButton.setText("AL | EN");
+
+        if (languageButton.getText().equals("AL | EN")) {
+            // Switch to English
+            languageButton.setText("EN | AL");
+            statusLabel.setText("Ready | Admin logged in");
+            idColumn.setText("ID");
+            firstNameColumn.setText("First Name");
+            lastNameColumn.setText("Last Name");
+            roomColumn.setText("Room Number");
+            genderColumn.setText("Gender");
+            roomstatusColumn.setText("Room Status");
+            buildingidColumn.setText("Building");
+            capacityColumn.setText("Capacity");
         } else {
-            bundle = ResourceBundle.getBundle("language/strings", new Locale("en"));
-            languageButton.setText("EN | SQ");
+            // Switch to Albanian
+            languageButton.setText("AL | EN");
+            statusLabel.setText("Gati | Admin i kyqur");
+            idColumn.setText("ID");
+            firstNameColumn.setText("Emri");
+            lastNameColumn.setText("Mbiemri");
+            roomColumn.setText("Numri i Dhomes");
+            genderColumn.setText("Gjinia");
+            roomstatusColumn.setText("Statusi i Dhomes");
+            buildingidColumn.setText("Ndertesa");
+            capacityColumn.setText("Kapaciteti");
         }
-        updateUI();
     }
 
-    private void updateUI() {
-        accountButton.setText(bundle.getString("accountButton"));
-        logoutButton.setText(bundle.getString("loginButton"));
-        searchButton.setText(bundle.getString("continueButton"));
-        idColumn.setText(bundle.getString("idColumn"));
-        firstNameColumn.setText(bundle.getString("nameLabel"));
-        lastNameColumn.setText(bundle.getString("lastnameLabel"));
-        roomColumn.setText(bundle.getString("roomColumn"));
-        genderColumn.setText(bundle.getString("genderLabel"));
-        roomstatusColumn.setText(bundle.getString("roomStatusColumn"));
-        buildingidColumn.setText(bundle.getString("buildingColumn"));
-        capacityColumn.setText(bundle.getString("capacityColumn"));
-        searchField.setPromptText(bundle.getString("searchPrompt"));
+    public void setRoomData(ObservableList<Room> data) {
+        this.roomData = data;
+        this.filteredData = new FilteredList<>(roomData, p -> true);
+        setupSearchFilter();
     }
 }

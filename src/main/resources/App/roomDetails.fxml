@@ -9,13 +9,12 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane prefHeight="700" prefWidth="1000" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RoomDetailsController">
 
     <top>
-        <fx:include source="topbar.fxml"/>
+        <fx:include source="topbar.fxml" />
     </top>
 
     <left>
@@ -29,6 +28,7 @@
             <HBox alignment="CENTER_LEFT" spacing="10">
                 <TextField fx:id="searchField" promptText="Kërko dhomen..." />
                 <Button fx:id="searchButton" onAction="#applyFilters" text="Kërko" />
+                <Button fx:id="languageButton" text="AL | EN" />
             </HBox>
 
             <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="AS_NEEDED" vbarPolicy="AS_NEEDED" VBox.vgrow="ALWAYS">
