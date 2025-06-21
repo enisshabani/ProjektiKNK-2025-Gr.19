@@ -188,7 +188,7 @@ public class SignUpController {
             return;
         }
 
-        DTO.SignUpDTO signUpDTO = new DTO.SignUpDTO(
+        Model.DTO.SignUpDTO signUpDTO = new Model.DTO.SignUpDTO(
                 name, lastname, email, password,
                 university, universityYear, averageGrade, gender
         );

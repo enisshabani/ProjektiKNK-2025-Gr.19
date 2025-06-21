@@ -47,7 +47,7 @@ public class DatabaseConnector {
             statement.setString(1, name);
             statement.setString(2, lastname);
             statement.setString(3, email);
-            statement.setString(4, PasswordHasher.hashPassword(password));
+            statement.setString(4, password);
             statement.setString(5, university);
             statement.setString(6, universityYear);
             statement.setDouble(7, averageGrade);
@@ -72,6 +72,7 @@ public class DatabaseConnector {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     String storedHashedPassword = rs.getString("password");
+                    // The password checking logic remains the same.
                     return PasswordHasher.checkPassword(password, storedHashedPassword);
                 }
             }

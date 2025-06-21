@@ -48,7 +48,6 @@ public class PasswordHasher {
         }
     }
 
-    // Add this method to PasswordHasher class
     public static boolean checkPassword(String inputPassword, String storedHash) {
         return verifyPassword(inputPassword, storedHash);
     }

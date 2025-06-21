@@ -158,41 +158,6 @@ public class LoginController {
         passwordField.clear();
     }
 
-    private void handleSuccessfulLogin() {
-        PauseTransition delay = new PauseTransition(Duration.seconds(4));
-        delay.setOnFinished(event -> {
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("/App/homeDashboard.fxml"));
-                Scene scene = loginButton.getScene();
-                scene.setRoot(root);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        delay.play();
-    }
-
-    @FXML
-    private void handleLogin(ActionEvent event) {
-        boolean loginSuccessful = validateLogin();
-
-        if (loginSuccessful) {
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("/App/homeDashboard.fxml"));
-                Stage stage = (Stage) loginButton.getScene().getWindow();
-                stage.setScene(new Scene(root));
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            new Alert(Alert.AlertType.ERROR, "Invalid credentials").show();
-        }
-    }
-
-    private boolean validateLogin() {
-        return false;
-    }
 
     @FXML
     private void handleSignUpLink(ActionEvent event) {

@@ -1,6 +1,6 @@
 package Repository;
 
-import DTO.SignUpDTO;
+import Model.DTO.SignUpDTO;
 import Service.DatabaseConnector;
 import Service.PasswordHasher;
 

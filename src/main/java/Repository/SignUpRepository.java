@@ -1,6 +1,6 @@
 package Repository;
 
-import DTO.SignUpDTO;
+import Model.DTO.SignUpDTO;
 
 public interface SignUpRepository {
     boolean insertSignupData(SignUpDTO signUpDTO);
