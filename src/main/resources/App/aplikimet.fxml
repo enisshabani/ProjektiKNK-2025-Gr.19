@@ -16,7 +16,7 @@
 <children>
 <Label styleClass="top-title" text="Dormitory Management System"/>
 <Region HBox.hgrow="ALWAYS"/>
-<Label styleClass="language-switch" text="EN | SQ"/>
+    <Button fx:id="languageButton" text="AL | EN" onAction="#handleLanguageSwitch" />
 <Button fx:id="accountButton" styleClass="top-button" text="Account"/>
 <Button fx:id="logoutButton" styleClass="top-button" text="Logout"/>
 </children>
