@@ -5,3 +5,15 @@ import java.util.stream.Collectors;
 import Model.DTO.AplikimetDTO;
 import Repository.AplikimetRepository;
 import Repository.AplikimetRepositoryImpl;
+
+public class AplikimetService {
+    private final AplikimetRepository aplikimetRepository;
+
+    public AplikimetService() {
+        this.aplikimetRepository = new AplikimetRepositoryImpl();
+    }
+
+    public List<AplikimetDTO> getAllAplikimet() {
+        return aplikimetRepository.getAllAplikimet();
+    }
+
