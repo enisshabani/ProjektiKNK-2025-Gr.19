@@ -29,6 +29,12 @@ public class Student {
         this.status = status;
     }
 
+    public Student(int id, String firstName, String lastName) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public int getId() { return id; }
 
     public void setId(int id) { this.id = id; }

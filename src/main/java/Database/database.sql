@@ -22,3 +22,11 @@ CREATE TABLE forgotPassword(
                                confirmationCode int,
                                newPassword varchar(255)
 );
+
+CREATE TABLE applications (
+                              application_date DATE,
+                              student_id INT,
+                              status VARCHAR(20),
+                              deadline DATE,
+                              FOREIGN KEY (student_id) REFERENCES students(id)
+);
