@@ -15,7 +15,6 @@ public class AplikimetDTO {
         this.status = status;
     }
 
- // Getters and Setters
     public int getId() {
         return id;
     }
@@ -45,7 +44,6 @@ public class AplikimetDTO {
     }
 
     public void setStatus(String status) {
-        this.status = status;
-    }
+        this.status = status;
+    }
 }
-   
