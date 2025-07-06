@@ -1,65 +1,56 @@
 package Controller;
 
+import Model.Room;
+import Model.DTO.RoomDTO;
+import Service.RoomService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import Model.Room;
+import javafx.stage.Stage;
+import java.util.ResourceBundle;
 
 public class RoomDetailsController {
+    @FXML private TableView<Room> roomTable;
+    @FXML private TableColumn<Room, Integer> idColumn;
+    @FXML private TableColumn<Room, String> firstNameColumn;
+    @FXML private TableColumn<Room, String> lastNameColumn;
+    @FXML private TableColumn<Room, String> roomColumn;
+    @FXML private TableColumn<Room, String> genderColumn;
+    @FXML private TableColumn<Room, String> roomstatusColumn;
+    @FXML private TableColumn<Room, String> buildingidColumn;
+    @FXML private TableColumn<Room, Integer> capacityColumn;
+    @FXML private TextField searchField;
+    @FXML private Button searchButton;
+    @FXML private Button languageButton;
+    @FXML private Label statusLabel;
+    @FXML private Button addButton;
+    @FXML private Button editButton;
+    @FXML private Button deleteButton;
 
-    @FXML
-    private TableView<Room> roomTable;
+    private final RoomService roomService;
+    private final ResourceBundle bundle;
+    private final ObservableList<Room> roomData = FXCollections.observableArrayList();
+    private final FilteredList<Room> filteredData = new FilteredList<>(roomData);
 
-    @FXML
-    private TableColumn<Room, Integer> idColumn;
-
-    @FXML
-    private TableColumn<Room, String> firstNameColumn;
-
-    @FXML
-    private TableColumn<Room, String> lastNameColumn;
-
-    @FXML
-    private TableColumn<Room, String> roomColumn;
-
-    @FXML
-    private TableColumn<Room, String> genderColumn;
-
-    @FXML
-    private TableColumn<Room, String> roomstatusColumn;
-
-    @FXML
-    private TableColumn<Room, String> buildingidColumn;
-
-    @FXML
-    private TableColumn<Room, Integer> capacityColumn;
-
-    @FXML
-    private TextField searchField;
-
-    @FXML
-    private Button searchButton;
-
-    @FXML
-    private Button languageButton;
-
-    @FXML
-    private Label statusLabel;
-
-    private ObservableList<Room> roomData = FXCollections.observableArrayList();
-    private FilteredList<Room> filteredData = new FilteredList<>(roomData, p -> true);
+    public RoomDetailsController() {
+        this.bundle = ResourceBundle.getBundle("language/strings");
+        this.roomService = new RoomService(bundle);
+    }
 
     @FXML
     public void initialize() {
+        setupColumns();
+        loadDataFromDatabase();
+        setupSearchFilter();
+        setupButtonActions();
+        statusLabel.setText("Ready | Admin logged in");
+    }
 
+    private void setupColumns() {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
@@ -68,95 +59,116 @@ public class RoomDetailsController {
         roomstatusColumn.setCellValueFactory(new PropertyValueFactory<>("roomStatus"));
         buildingidColumn.setCellValueFactory(new PropertyValueFactory<>("building"));
         capacityColumn.setCellValueFactory(new PropertyValueFactory<>("capacity"));
-
-        loadSampleData();
-
-        setupSearchFilter();
-
-        statusLabel.setText("Ready | Admin logged in");
-
-        languageButton.setOnAction(event -> toggleLanguage());
     }
 
-    private void loadSampleData() {
-        // This is sample data - replace with your actual data loading logic
-        roomData.add(new Room(1, "John", "Doe", "101", "Male", "Occupied", "Building A", 2));
-        roomData.add(new Room(2, "Jane", "Smith", "102", "Female", "Occupied", "Building A", 2));
-        roomData.add(new Room(3, "Alice", "Johnson", "201", "Female", "Available", "Building B", 3));
-        roomData.add(new Room(4, "Bob", "Williams", "202", "Male", "Maintenance", "Building B", 3));
-
-        SortedList<Room> sortedData = new SortedList<>(filteredData);
-
-        sortedData.comparatorProperty().bind(roomTable.comparatorProperty());
-
-        roomTable.setItems(sortedData);
+    private void loadDataFromDatabase() {
+        roomData.clear();
+        roomService.getAllRooms().forEach(dto ->
+                roomData.add(new Room(
+                        dto.getId(),
+                        dto.getFirstName() != null ? dto.getFirstName() : "",
+                        dto.getLastName() != null ? dto.getLastName() : "",
+                        dto.getRoomNumber(),
+                        dto.getGender() != null ? dto.getGender() : "",
+                        dto.getRoomStatus(),
+                        dto.getBuilding(),
+                        dto.getCapacity()
+                ))
+        );
+        roomTable.setItems(new SortedList<>(filteredData));
     }
 
     private void setupSearchFilter() {
-        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(room -> {
-                // If filter text is empty, display all rooms
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-                String lowerCaseFilter = newValue.toLowerCase();
-
-                if (room.getFirstName().toLowerCase().contains(lowerCaseFilter)) {
-                    return true;
-                } else if (room.getLastName().toLowerCase().contains(lowerCaseFilter)) {
-                    return true;
-                } else if (room.getRoomNumber().toLowerCase().contains(lowerCaseFilter)) {
-                    return true;
-                } else if (room.getGender().toLowerCase().contains(lowerCaseFilter)) {
-                    return true;
-                } else if (room.getRoomStatus().toLowerCase().contains(lowerCaseFilter)) {
-                    return true;
-                } else if (room.getBuilding().toLowerCase().contains(lowerCaseFilter)) {
-                    return true;
-                } else if (String.valueOf(room.getCapacity()).contains(lowerCaseFilter)) {
-                    return true;
-                }
-                return false;
-            });
-        });
+        searchField.textProperty().addListener((obs, oldVal, newVal) ->
+                filteredData.setPredicate(room ->
+                        newVal == null || newVal.isEmpty() || matchesSearch(room, newVal.toLowerCase())
+                )
+        );
     }
 
-    @FXML
-    private void applyFilters() {
+    private boolean matchesSearch(Room room, String searchTerm) {
+        return room.getFirstName().toLowerCase().contains(searchTerm) ||
+                room.getLastName().toLowerCase().contains(searchTerm) ||
+                room.getRoomNumber().toLowerCase().contains(searchTerm) ||
+                room.getGender().toLowerCase().contains(searchTerm) ||
+                room.getRoomStatus().toLowerCase().contains(searchTerm) ||
+                room.getBuilding().toLowerCase().contains(searchTerm) ||
+                String.valueOf(room.getCapacity()).contains(searchTerm);
     }
 
-    private void toggleLanguage() {
+    private void setupButtonActions() {
+        addButton.setOnAction(e -> handleAddRoom());
+        editButton.setOnAction(e -> handleEditRoom());
+        deleteButton.setOnAction(e -> handleDeleteRoom());
+        languageButton.setOnAction(e -> toggleLanguage());
+    }
 
-        if (languageButton.getText().equals("AL | EN")) {
-            // Switch to English
-            languageButton.setText("EN | AL");
-            statusLabel.setText("Ready | Admin logged in");
-            idColumn.setText("ID");
-            firstNameColumn.setText("First Name");
-            lastNameColumn.setText("Last Name");
-            roomColumn.setText("Room Number");
-            genderColumn.setText("Gender");
-            roomstatusColumn.setText("Room Status");
-            buildingidColumn.setText("Building");
-            capacityColumn.setText("Capacity");
-        } else {
-            // Switch to Albanian
-            languageButton.setText("AL | EN");
-            statusLabel.setText("Gati | Admin i kyqur");
-            idColumn.setText("ID");
-            firstNameColumn.setText("Emri");
-            lastNameColumn.setText("Mbiemri");
-            roomColumn.setText("Numri i Dhomes");
-            genderColumn.setText("Gjinia");
-            roomstatusColumn.setText("Statusi i Dhomes");
-            buildingidColumn.setText("Ndertesa");
-            capacityColumn.setText("Kapaciteti");
+    private void handleAddRoom() {
+        Room newRoom = new Room(0, "", "", "", "", "Available", "", 1);
+        if (showRoomDialog(newRoom)) {
+            String result = roomService.addRoom(convertToDTO(newRoom));
+            if ("success".equals(result)) {
+                loadDataFromDatabase();
+            } else {
+                showAlert("Error", result);
+            }
         }
     }
 
-    public void setRoomData(ObservableList<Room> data) {
-        this.roomData = data;
-        this.filteredData = new FilteredList<>(roomData, p -> true);
-        setupSearchFilter();
+    private void handleEditRoom() {
+        Room selected = roomTable.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            if (showRoomDialog(selected)) {
+                String result = roomService.updateRoom(convertToDTO(selected));
+                if ("success".equals(result)) {
+                    loadDataFromDatabase();
+                } else {
+                    showAlert("Error", result);
+                }
+            }
+        } else {
+            showAlert("No Selection", "Please select a room to edit");
+        }
+    }
+
+    private void handleDeleteRoom() {
+        Room selected = roomTable.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            String result = roomService.deleteRoom(selected.getId());
+            if ("success".equals(result)) {
+                loadDataFromDatabase();
+            } else {
+                showAlert("Error", result);
+            }
+        } else {
+            showAlert("No Selection", "Please select a room to delete");
+        }
+    }
+
+    private boolean showRoomDialog(Room room) {
+        // Implement your dialog logic here
+        // Return true if user clicked OK, false otherwise
+        return true;
+    }
+
+    private RoomDTO convertToDTO(Room room) {
+        return new RoomDTO(
+                room.getId(),
+                room.getFirstName(),
+                room.getLastName(),
+                room.getRoomNumber(),
+                room.getGender(),
+                room.getRoomStatus(),
+                room.getBuilding(),
+                room.getCapacity()
+        );
+    }
+
+    private void showAlert(String title, String message) {
+        new Alert(Alert.AlertType.INFORMATION, message).showAndWait();
+    }
+
+    private void toggleLanguage() {
+        // Implement language toggle logic
     }
 }

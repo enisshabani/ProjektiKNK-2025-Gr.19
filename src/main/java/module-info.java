@@ -2,7 +2,7 @@ module com.example.demo {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
-
+    requires com.fasterxml.jackson.core;
 
 
     opens com.example.demo1 to javafx.fxml;
