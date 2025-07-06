@@ -24,7 +24,6 @@ CREATE TABLE forgotPassword(
 );
 
 
--- Add this at the beginning of your file (before rooms table)
 CREATE TABLE buildings (
                            id INT AUTO_INCREMENT PRIMARY KEY,
                            name VARCHAR(50) NOT NULL,
@@ -32,7 +31,7 @@ CREATE TABLE buildings (
                            description TEXT
 );
 
--- Then modify your rooms table to match exactly this:
+
 CREATE TABLE rooms (
                        id INT AUTO_INCREMENT PRIMARY KEY,
                        room_number VARCHAR(10) NOT NULL,
