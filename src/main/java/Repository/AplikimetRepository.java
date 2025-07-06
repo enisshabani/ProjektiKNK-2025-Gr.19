@@ -7,12 +7,18 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import Model.DTO.AplikimetDTO;
 
-public class ApplicationRepository {
+public interface AplikimetRepository {
+    List<AplikimetDTO> getAllAplikimet();
+    void updateAplikimStatus(int aplikimId, String newStatus);
+}
+
+public class AplikimetRepository {
 
     private Connection connection;
 
-    public ApplicationRepository(Connection connection) {
+    public AplikimetRepository(Connection connection) {
         this.connection = connection;
     }
 
