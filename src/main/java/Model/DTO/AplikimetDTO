@@ -1,0 +1,18 @@
+package Model.DTO;
+
+import java.time.LocalDate;
+
+public class AplikimetDTO {
+    private int id;
+    private String studentName;
+    private LocalDate applicationDate;
+    private String status;
+
+    public AplikimetDTO(int id, String studentName, LocalDate applicationDate, String status) {
+        this.id = id;
+        this.studentName = studentName;
+        this.applicationDate = applicationDate;
+        this.status = status;
+    }
+
+   
